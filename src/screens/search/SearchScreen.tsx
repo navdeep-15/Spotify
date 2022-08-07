@@ -44,7 +44,7 @@ export default function Search(props: any) {
           </View>
         </View>
       </ScrollView>
-      {/* <MiniPlayer /> */}
+      <MiniPlayer />
     </View>
   )
 }
