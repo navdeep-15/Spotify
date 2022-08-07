@@ -9,6 +9,7 @@ import { useIsFocused } from '@react-navigation/native'
 import actionNames from '@navdeep/utils/actionNames'
 import Sound from 'react-native-sound'
 import MiniPlayer from '@navdeep/components/MiniPlayer'
+import screenNames from '@navdeep/utils/screenNames'
 
 export default function MainSearch(props: any) {
   const dispatch = useDispatch()
@@ -111,6 +112,7 @@ export default function MainSearch(props: any) {
                 isRecentSearches={!searchText?.length}
                 item={item}
                 index={index}
+                navigation={props?.navigation}
               />
             )
           }}
@@ -185,6 +187,7 @@ const ListItem = (props: any) => {
         }
       })
     }
+    props?.navigation?.navigate(screenNames?.HOME_NAVIGATOR, { screen: screenNames?.HOME_SCREEN })
   }
 
   const onPressDelete = () => {
