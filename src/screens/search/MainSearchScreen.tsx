@@ -145,14 +145,11 @@ const ListItem = (props: any) => {
   const { recentSearchesList } = useSelector((state: any) => state?.recentSearchesReducer);
   const { isPlaying, soundObject } = useSelector((state: any) => state?.currentSongReducer);
 
-  const stopCurrentSong = () => {
-    if (isPlaying) {
-      soundObject?.stop()
-    }
-  }
+  const onPressSong = async () => {
 
-  const onPressSong = () => {
-    stopCurrentSong()
+    if (isPlaying) {
+      await soundObject?.stop()
+    }
 
     let tempRecentSearchList = [...recentSearchesList ?? []] ?? []
     tempRecentSearchList?.unshift(props?.item)
