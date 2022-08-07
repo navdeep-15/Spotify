@@ -18,7 +18,7 @@ export default function MiniPlayer() {
     Sound.setCategory('Playback');
 
     useEffect(() => {
-        if (isFocused && soundObject?._filename) {
+        if (isFocused && soundObject) {
             if (isPlaying) {
                 soundObject?.play((success: any) => {
                     if (success) {
@@ -59,7 +59,7 @@ export default function MiniPlayer() {
         }
     }
 
-    if (soundObject?._filename) {
+    if (soundObject) {
         return (
             <View style={styles.container}>
                 <TouchableOpacity>
