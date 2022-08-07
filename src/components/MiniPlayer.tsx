@@ -17,28 +17,8 @@ export default function MiniPlayer() {
 
     Sound.setCategory('Playback');
 
-    console.log('soundObject-->.', soundObject);
-
     useEffect(() => {
         if (isFocused && soundObject) {
-            // if (isPlaying) {
-            //     soundObject?.play((success: any) => {
-            //         if (success) {
-            //             dispatch({
-            //                 type: actionNames?.CURRENT_SONG_REDUCER,
-            //                 payload: {
-            //                     isPlaying: false,
-            //                 }
-            //             })
-            //             console.log('successfully finished playing');
-            //         } else {
-            //             console.log('playback failed due to audio decoding errors');
-            //         }
-            //     });
-            // }
-            // else {
-            //     soundObject?.pause();
-            // }
             intializeSong()
         }
     }, [isFocused, isPlaying, soundObject])
@@ -60,7 +40,7 @@ export default function MiniPlayer() {
             });
         }
         else {
-            soundObject?.pause();
+            await soundObject?.pause();
         }
     }
 

@@ -188,7 +188,9 @@ const ListItem = (props: any) => {
         }
       })
     }
-    // props?.navigation?.navigate(screenNames?.HOME_NAVIGATOR, { screen: screenNames?.HOME_SCREEN })
+    setTimeout(() => {
+      props?.navigation?.navigate(screenNames?.HOME_NAVIGATOR, { screen: screenNames?.HOME_SCREEN })
+    }, 100)
   }
 
   const onPressDelete = () => {
