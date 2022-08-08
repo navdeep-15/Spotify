@@ -3,25 +3,29 @@ import React, { useState, useEffect } from 'react'
 import fonts from '@navdeep/utils/fonts'
 import { vw, vh } from '@navdeep/utils/dimensions'
 import screenNames from '@navdeep/utils/screenNames'
-import Carousel from 'react-native-snap-carousel';
+
+const data = [
+  {
+    title1: 'Ad breaks',
+    title2: 'Ad-free music listening'
+  },
+  {
+    title1: 'Streaming only',
+    title2: 'Download songs'
+  },
+  {
+    title1: 'Listen alone',
+    title2: 'Group session'
+  }
+]
 
 export default function Premium() {
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Text style={styles.heading}>Try Premium free for 1 month</Text>
-        {/* <Carousel
-          data={[1, 2, 3]}
-          inactiveSlideScale={0.8}
-          // sliderWidth={vw(350)}
-          // itemWidth={vw(285)}
-          renderItem={({ item, index }: any) => {
-            return (
-              null
-            )
-          }}
-        /> */}
 
+       
       </ScrollView>
     </View>
   )
