@@ -10,10 +10,11 @@ import HomeNavigator from './HomeNavigator';
 import SearchNavigator from './SearchNavigator';
 import LibraryNavigator from './LibraryNavigator';
 import PremiumNavigator from './PremiumNavigator';
+import * as navigationRef from '@navdeep/utils/navigationService'
 
 const Tab = createBottomTabNavigator();
 
-export default function BottomNavigator() {
+export default function BottomNavigator(props: any) {
 
     useEffect(() => {
         const backAction = () => {
@@ -27,6 +28,18 @@ export default function BottomNavigator() {
         return () => backHandler.remove();
     }, []);
 
+    const isBottomTabBarVisible = () => {
+        const routeName = navigationRef.currentRoute()?.name;
+        console.log('current routeName->>', routeName);
+
+        switch (routeName) {
+            case screenNames?.BROWSER_SCREEN:
+                return false
+            default:
+                return true
+        }
+    }
+
     return (
         <Tab.Navigator
             screenOptions={{
@@ -35,7 +48,7 @@ export default function BottomNavigator() {
                 tabBarBackground: () => {
                     return (
                         <LinearGradient
-                            colors={['transparent','#121212']}
+                            colors={['transparent', '#121212']}
                             start={{ x: 0, y: 0 }}
                             end={{ x: 0, y: 0.25 }}
                             style={{ flex: 1 }}
@@ -49,7 +62,7 @@ export default function BottomNavigator() {
                 name={screenNames?.HOME_NAVIGATOR}
                 component={HomeNavigator}
                 options={{
-                    tabBarStyle: styles.tabStyle,
+                    tabBarStyle: isBottomTabBarVisible() ? styles.tabStyle : { display: 'none' },
                     tabBarLabel: ({ focused }) => <Text style={focused ? { ...styles.tabBarLabelStyle, fontFamily: fonts.EXTRA_BOLD, color: 'white' } : styles.tabBarLabelStyle}>Home</Text>,
                     tabBarIcon: ({ focused }) => <Image style={!focused ? styles.tabBarIcon : { ...styles.tabBarIcon, tintColor: 'white' }} source={focused ? localImages.HOME_FOCUSED : localImages.HOME_UNFOCUSED} />
                 }}
@@ -58,7 +71,7 @@ export default function BottomNavigator() {
                 name={screenNames?.SEARCH_NAVIGATOR}
                 component={SearchNavigator}
                 options={{
-                    tabBarStyle: styles.tabStyle,
+                    tabBarStyle: isBottomTabBarVisible() ? styles.tabStyle : { display: 'none' },
                     tabBarLabel: ({ focused }) => <Text style={focused ? { ...styles.tabBarLabelStyle, fontFamily: fonts.EXTRA_BOLD, color: 'white' } : styles.tabBarLabelStyle}>Search</Text>,
                     tabBarIcon: ({ focused }) => <Image style={!focused ? styles.tabBarIcon : { ...styles.tabBarIcon, tintColor: 'white' }} source={focused ? localImages.SEARCH_FOCUSED : localImages.SEARCH_UNFOCUSED} />
                 }}
@@ -67,7 +80,7 @@ export default function BottomNavigator() {
                 name={screenNames?.LIBRARY_NAVIGATOR}
                 component={LibraryNavigator}
                 options={{
-                    tabBarStyle: styles.tabStyle,
+                    tabBarStyle: isBottomTabBarVisible() ? styles.tabStyle : { display: 'none' },
                     tabBarLabel: ({ focused }) => <Text style={focused ? { ...styles.tabBarLabelStyle, fontFamily: fonts.EXTRA_BOLD, color: 'white' } : styles.tabBarLabelStyle}>Your Library</Text>,
                     tabBarIcon: ({ focused }) => <Image style={!focused ? styles.tabBarIcon : { ...styles.tabBarIcon, tintColor: 'white' }} source={focused ? localImages.LIBRARY_FOCUSED : localImages.LIBRARY_UNFOCUSED} />
                 }}
@@ -76,7 +89,7 @@ export default function BottomNavigator() {
                 name={screenNames?.PREMIUM_NAVIGATOR}
                 component={PremiumNavigator}
                 options={{
-                    tabBarStyle: styles.tabStyle,
+                    tabBarStyle: isBottomTabBarVisible() ? styles.tabStyle : { display: 'none' },
                     tabBarLabel: ({ focused }) => <Text style={focused ? { ...styles.tabBarLabelStyle, fontFamily: fonts.EXTRA_BOLD, color: 'white' } : styles.tabBarLabelStyle}>Premium</Text>,
                     tabBarIcon: ({ focused }) => <Image style={!focused ? styles.tabBarIcon : { ...styles.tabBarIcon, tintColor: 'white' }} source={focused ? localImages.PREMIUM : localImages.PREMIUM} />
                 }}
@@ -95,7 +108,7 @@ const styles = StyleSheet.create({
         width: vw(24),
         height: vw(24),
         tintColor: '#cbcbcb',
-        marginBottom:vh(5)
+        marginBottom: vh(5)
     },
     tabStyle: {
         height: vh(60),

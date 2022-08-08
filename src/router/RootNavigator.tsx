@@ -8,6 +8,7 @@ import NetInfo from "@react-native-community/netinfo";
 import actionNames from '@navdeep/utils/actionNames';
 import common from '@navdeep/utils/common';
 import { getAccessToken } from '@navdeep/actions';
+import { navigationRef } from '@navdeep/utils/navigationService';
 
 export default function RootNavigator() {
     const dispatch = useDispatch()
@@ -30,7 +31,7 @@ export default function RootNavigator() {
     }, [])
 
     return (
-        <NavigationContainer>
+        <NavigationContainer ref={navigationRef}>
             {
                 loginInfo?.status ? <BottomNavigator /> : <AuthNavigator />
             }
