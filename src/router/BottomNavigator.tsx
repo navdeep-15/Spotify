@@ -29,15 +29,16 @@ export default function BottomNavigator(props: any) {
     }, []);
 
     const isBottomTabBarVisible = () => {
-        const routeName = navigationRef.currentRoute()?.name;
-        console.log('current routeName->>', routeName);
+        // const routeName = navigationRef.currentRoute()?.name;
+        // console.log('current routeName->>', routeName);
 
-        switch (routeName) {
-            case screenNames?.BROWSER_SCREEN:
-                return false
-            default:
-                return true
-        }
+        // switch (routeName) {
+        //     case screenNames?.BROWSER_SCREEN:
+        //         return false
+        //     default:
+        //         return true
+        // }
+        return true
     }
 
     return (

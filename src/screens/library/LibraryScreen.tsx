@@ -1,10 +1,11 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView } from 'react-native'
 import React from 'react'
 import fonts from '@navdeep/utils/fonts'
 import { vw, vh } from '@navdeep/utils/dimensions'
 import localImages from '@navdeep/utils/localImages'
 import screenNames from '@navdeep/utils/screenNames'
 import { useSelector } from 'react-redux'
+import MiniPlayer from '@navdeep/components/MiniPlayer'
 
 export default function Library() {
 
@@ -36,6 +37,10 @@ export default function Library() {
           </TouchableOpacity>
         </View>
       </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+
+      </ScrollView>
+      <MiniPlayer />
     </View>
   )
 }
