@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image ,SafeAreaView, Platform} from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image, SafeAreaView, Platform } from 'react-native'
 import React from 'react'
 import LinearGradient from 'react-native-linear-gradient';
 import { vw, vh } from '@navdeep/utils/dimensions'
@@ -7,8 +7,7 @@ import screenNames from '@navdeep/utils/screenNames'
 import fonts from '@navdeep/utils/fonts';
 import MiniPlayer from '@navdeep/components/MiniPlayer';
 
-
-export default function Home() {
+export default function Home(props: any) {
   return (
     <LinearGradient
       colors={['#8FA01F', '#121212']}
@@ -19,13 +18,13 @@ export default function Home() {
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
         <Text style={styles.screenHeading}>Home</Text>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => props?.navigation?.navigate(screenNames?.RECENTLY_PLAYED_SCREEN)}>
             <Image
               source={localImages?.RECENT}
               style={{ width: vw(25), height: vw(25), marginRight: vw(12) }}
             />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => props?.navigation?.navigate(screenNames?.SETTINGS_SCREEN)}>
             <Image
               source={localImages?.SETTINGS}
               style={{ width: vw(25), height: vw(25) }}
@@ -33,7 +32,7 @@ export default function Home() {
           </TouchableOpacity>
         </View>
       </View>
-      <MiniPlayer/>
+      <MiniPlayer />
     </LinearGradient>
   )
 }
@@ -49,6 +48,6 @@ const styles = StyleSheet.create({
     fontSize: vw(24),
     fontFamily: fonts.BOLD,
     color: 'white',
-    marginBottom:vh(18)
+    marginBottom: vh(18)
   }
 })
