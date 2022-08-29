@@ -15,7 +15,6 @@ import * as navigationRef from '@navdeep/utils/navigationService'
 const Tab = createBottomTabNavigator();
 
 export default function BottomNavigator(props: any) {
-
     useEffect(() => {
         const backAction = () => {
             Alert.alert('Hold On', 'Are you sure you want to exit', [
@@ -29,8 +28,8 @@ export default function BottomNavigator(props: any) {
     }, []);
 
     const isBottomTabBarVisible = () => {
-        // const routeName = navigationRef.currentRoute()?.name;
-        // console.log('current routeName->>', routeName);
+        const routeName = navigationRef?.currentRoute()?.name;
+        console.log('current routeName->>', routeName, navigationRef);
 
         // switch (routeName) {
         //     case screenNames?.BROWSER_SCREEN:

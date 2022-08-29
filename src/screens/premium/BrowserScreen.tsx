@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, Image, Platform } from 'react-native'
 import { WebView } from 'react-native-webview';
 import React from 'react'
 import { vw, vh } from '@navdeep/utils/dimensions'
@@ -10,7 +10,7 @@ export default function BrowserScreen(props: any) {
       <TouchableOpacity style={styles.headerStyle} onPress={() => props?.navigation?.goBack()}>
         <Image
           source={localImages?.CROSS}
-          style={{ width: vw(25), height: vw(25), tintColor: 'white' }}
+          style={{ width: vw(25), height: vw(25), tintColor: 'white',marginTop:Platform.OS==='ios'? vh(25):null }}
         />
       </TouchableOpacity>
       <WebView source={{ uri: props?.route?.params?.url }} />
