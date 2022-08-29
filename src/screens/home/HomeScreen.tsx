@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image ,SafeAreaView, Platform} from 'react-native'
 import React from 'react'
 import LinearGradient from 'react-native-linear-gradient';
 import { vw, vh } from '@navdeep/utils/dimensions'
@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#121212',
-    paddingTop: vh(25),
-    paddingHorizontal: vw(20)
+    paddingHorizontal: vw(20),
+    paddingTop: Platform?.OS === 'ios' ? vh(40) : vh(25)
   },
   screenHeading: {
     fontSize: vw(24),

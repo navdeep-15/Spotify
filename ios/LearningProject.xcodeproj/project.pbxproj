@@ -12,8 +12,22 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		149B45FF16CB481DBC36F2D2 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0C44AB9A8BB64360A72B93B1 /* ProximaNova-Regular.otf */; };
+		2186476C0E004046A86B438B /* ProximaNovaA-RegularIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8DD1A64A459E4CF1A9671F35 /* ProximaNovaA-RegularIt.ttf */; };
+		2449E1DC5AF84E1EAEF98F8D /* ProximaNovaA-ExtrabldIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 019BBA597090438EA21664E2 /* ProximaNovaA-ExtrabldIt.ttf */; };
+		30451958EAF242A89571969D /* SignPainterHouseScript.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1432E7A774F2425EBF7D096F /* SignPainterHouseScript.ttf */; };
+		5742678479C149DF81A84CB6 /* ProximaNovaA-SemiboldIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8497D1C317D24E8580199CE7 /* ProximaNovaA-SemiboldIt.ttf */; };
 		7699B88040F8A987B510C191 /* libPods-LearningProject-LearningProjectTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-LearningProject-LearningProjectTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		9278B325D38148648911BEAC /* ProximaNovaA-BoldIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA25D252E9AE4197B17887BF /* ProximaNovaA-BoldIt.ttf */; };
+		B10E7CDD3FD4408FBD11867B /* ProximaNovaA-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 158872B26DC9416AB327B7B3 /* ProximaNovaA-Thin.ttf */; };
+		BF285B7F2CA94930A8C8F615 /* ProximaNovaA-BlackIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCFEFA0FCBDD4C10846A6543 /* ProximaNovaA-BlackIt.ttf */; };
+		BFBAC882AB8B40848DEAAE49 /* ProximaNovaA-LightIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A70AAA26B1964220B1DD4405 /* ProximaNovaA-LightIt.ttf */; };
+		CC678B70FFA744B99F5A0608 /* ProximaNovaA-ThinIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B715FB4DA85C460B96F28B04 /* ProximaNovaA-ThinIt.ttf */; };
+		DDA1A78E0FCD46C68E3A2F42 /* ProximaNovaA-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 94CA3D5DF910416BAB3707B3 /* ProximaNovaA-Bold.otf */; };
+		E4E9AAEFB1A4421694FDB621 /* ProximaNovaA-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B980565BDACA4CC4B6F8FDD9 /* ProximaNovaA-Semibold.ttf */; };
+		F4A997FAADB04D298F4A20FC /* ProximaNovaA-Extrabld.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91F8A7B814B04D20A650FB62 /* ProximaNovaA-Extrabld.ttf */; };
+		FFCFB8CE00BE4236967C27C1 /* ProximaNovaA-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BCFE06086BD4DFF884856E3 /* ProximaNovaA-Light.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,20 +44,34 @@
 		00E356EE1AD99517003FC87E /* LearningProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LearningProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* LearningProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LearningProjectTests.m; sourceTree = "<group>"; };
+		019BBA597090438EA21664E2 /* ProximaNovaA-ExtrabldIt.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "ProximaNovaA-ExtrabldIt.ttf"; path = "../assets/fonts/ProximaNovaA-ExtrabldIt.ttf"; sourceTree = "<group>"; };
+		0C44AB9A8BB64360A72B93B1 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "ProximaNova-Regular.otf"; path = "../assets/fonts/ProximaNova-Regular.otf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* LearningProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearningProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = LearningProject/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = LearningProject/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = LearningProject/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = LearningProject/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = LearningProject/main.m; sourceTree = "<group>"; };
+		1432E7A774F2425EBF7D096F /* SignPainterHouseScript.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = SignPainterHouseScript.ttf; path = ../assets/fonts/SignPainterHouseScript.ttf; sourceTree = "<group>"; };
+		158872B26DC9416AB327B7B3 /* ProximaNovaA-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "ProximaNovaA-Thin.ttf"; path = "../assets/fonts/ProximaNovaA-Thin.ttf"; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-LearningProject-LearningProjectTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LearningProject-LearningProjectTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4392A12AC88292D35C810B /* Pods-LearningProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LearningProject.debug.xcconfig"; path = "Target Support Files/Pods-LearningProject/Pods-LearningProject.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-LearningProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LearningProject.release.xcconfig"; path = "Target Support Files/Pods-LearningProject/Pods-LearningProject.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-LearningProject-LearningProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LearningProject-LearningProjectTests.debug.xcconfig"; path = "Target Support Files/Pods-LearningProject-LearningProjectTests/Pods-LearningProject-LearningProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-LearningProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LearningProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = LearningProject/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8497D1C317D24E8580199CE7 /* ProximaNovaA-SemiboldIt.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "ProximaNovaA-SemiboldIt.ttf"; path = "../assets/fonts/ProximaNovaA-SemiboldIt.ttf"; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-LearningProject-LearningProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LearningProject-LearningProjectTests.release.xcconfig"; path = "Target Support Files/Pods-LearningProject-LearningProjectTests/Pods-LearningProject-LearningProjectTests.release.xcconfig"; sourceTree = "<group>"; };
+		8DD1A64A459E4CF1A9671F35 /* ProximaNovaA-RegularIt.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "ProximaNovaA-RegularIt.ttf"; path = "../assets/fonts/ProximaNovaA-RegularIt.ttf"; sourceTree = "<group>"; };
+		91F8A7B814B04D20A650FB62 /* ProximaNovaA-Extrabld.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "ProximaNovaA-Extrabld.ttf"; path = "../assets/fonts/ProximaNovaA-Extrabld.ttf"; sourceTree = "<group>"; };
+		94CA3D5DF910416BAB3707B3 /* ProximaNovaA-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "ProximaNovaA-Bold.otf"; path = "../assets/fonts/ProximaNovaA-Bold.otf"; sourceTree = "<group>"; };
+		9BCFE06086BD4DFF884856E3 /* ProximaNovaA-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "ProximaNovaA-Light.ttf"; path = "../assets/fonts/ProximaNovaA-Light.ttf"; sourceTree = "<group>"; };
+		A70AAA26B1964220B1DD4405 /* ProximaNovaA-LightIt.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "ProximaNovaA-LightIt.ttf"; path = "../assets/fonts/ProximaNovaA-LightIt.ttf"; sourceTree = "<group>"; };
+		AA25D252E9AE4197B17887BF /* ProximaNovaA-BoldIt.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "ProximaNovaA-BoldIt.ttf"; path = "../assets/fonts/ProximaNovaA-BoldIt.ttf"; sourceTree = "<group>"; };
+		B715FB4DA85C460B96F28B04 /* ProximaNovaA-ThinIt.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "ProximaNovaA-ThinIt.ttf"; path = "../assets/fonts/ProximaNovaA-ThinIt.ttf"; sourceTree = "<group>"; };
+		B980565BDACA4CC4B6F8FDD9 /* ProximaNovaA-Semibold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "ProximaNovaA-Semibold.ttf"; path = "../assets/fonts/ProximaNovaA-Semibold.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		FCFEFA0FCBDD4C10846A6543 /* ProximaNovaA-BlackIt.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "ProximaNovaA-BlackIt.ttf"; path = "../assets/fonts/ProximaNovaA-BlackIt.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +134,28 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		437E74BDF4FC4497BF069A05 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0C44AB9A8BB64360A72B93B1 /* ProximaNova-Regular.otf */,
+				94CA3D5DF910416BAB3707B3 /* ProximaNovaA-Bold.otf */,
+				FCFEFA0FCBDD4C10846A6543 /* ProximaNovaA-BlackIt.ttf */,
+				AA25D252E9AE4197B17887BF /* ProximaNovaA-BoldIt.ttf */,
+				91F8A7B814B04D20A650FB62 /* ProximaNovaA-Extrabld.ttf */,
+				019BBA597090438EA21664E2 /* ProximaNovaA-ExtrabldIt.ttf */,
+				9BCFE06086BD4DFF884856E3 /* ProximaNovaA-Light.ttf */,
+				A70AAA26B1964220B1DD4405 /* ProximaNovaA-LightIt.ttf */,
+				8DD1A64A459E4CF1A9671F35 /* ProximaNovaA-RegularIt.ttf */,
+				B980565BDACA4CC4B6F8FDD9 /* ProximaNovaA-Semibold.ttf */,
+				8497D1C317D24E8580199CE7 /* ProximaNovaA-SemiboldIt.ttf */,
+				158872B26DC9416AB327B7B3 /* ProximaNovaA-Thin.ttf */,
+				B715FB4DA85C460B96F28B04 /* ProximaNovaA-ThinIt.ttf */,
+				1432E7A774F2425EBF7D096F /* SignPainterHouseScript.ttf */,
+			);
+			name = Resources;
+			path = "";
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +172,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				437E74BDF4FC4497BF069A05 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -244,6 +295,20 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				149B45FF16CB481DBC36F2D2 /* ProximaNova-Regular.otf in Resources */,
+				DDA1A78E0FCD46C68E3A2F42 /* ProximaNovaA-Bold.otf in Resources */,
+				BF285B7F2CA94930A8C8F615 /* ProximaNovaA-BlackIt.ttf in Resources */,
+				9278B325D38148648911BEAC /* ProximaNovaA-BoldIt.ttf in Resources */,
+				F4A997FAADB04D298F4A20FC /* ProximaNovaA-Extrabld.ttf in Resources */,
+				2449E1DC5AF84E1EAEF98F8D /* ProximaNovaA-ExtrabldIt.ttf in Resources */,
+				FFCFB8CE00BE4236967C27C1 /* ProximaNovaA-Light.ttf in Resources */,
+				BFBAC882AB8B40848DEAAE49 /* ProximaNovaA-LightIt.ttf in Resources */,
+				2186476C0E004046A86B438B /* ProximaNovaA-RegularIt.ttf in Resources */,
+				E4E9AAEFB1A4421694FDB621 /* ProximaNovaA-Semibold.ttf in Resources */,
+				5742678479C149DF81A84CB6 /* ProximaNovaA-SemiboldIt.ttf in Resources */,
+				B10E7CDD3FD4408FBD11867B /* ProximaNovaA-Thin.ttf in Resources */,
+				CC678B70FFA744B99F5A0608 /* ProximaNovaA-ThinIt.ttf in Resources */,
+				30451958EAF242A89571969D /* SignPainterHouseScript.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

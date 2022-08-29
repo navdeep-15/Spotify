@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, StatusBar, TouchableOpacity, Image, TextInput, FlatList } from 'react-native'
+import { StyleSheet, Text, View, StatusBar, TouchableOpacity, Image, TextInput, FlatList,SafeAreaView } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { vh, vw } from '@navdeep/utils/dimensions'
 import fonts from '@navdeep/utils/fonts'
@@ -58,7 +58,7 @@ export default function MainSearch(props: any) {
   }
 
   return (
-    <View>
+    <SafeAreaView style={{backgroundColor:'#575757'}}>
       <StatusBar backgroundColor={'#2a2a2a'} />
       <View style={styles.searchView}>
         <TouchableOpacity onPress={() => {
@@ -135,7 +135,7 @@ export default function MainSearch(props: any) {
         />
       </View>
       {/* <MiniPlayer/> */}
-    </View>
+    </SafeAreaView>
   )
 }
 
