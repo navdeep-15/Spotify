@@ -9,6 +9,7 @@ import actionNames from '@navdeep/utils/actionNames';
 import common from '@navdeep/utils/common';
 import { getAccessToken } from '@navdeep/actions';
 import { navigationRef } from '@navdeep/utils/navigationService';
+import MiniPlayer from '@navdeep/components/MiniPlayer';
 
 export default function RootNavigator() {
     const dispatch = useDispatch()
@@ -34,6 +35,9 @@ export default function RootNavigator() {
         <NavigationContainer ref={navigationRef}>
             {
                 loginInfo?.status ? <BottomNavigator /> : <AuthNavigator />
+            }
+            {
+                loginInfo?.status ? <MiniPlayer /> : null
             }
         </NavigationContainer>
     )

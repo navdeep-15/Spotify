@@ -78,6 +78,7 @@ export default function Login(props: any) {
         placeholderTextColor={'gray'}
         style={styles.inputText}
         selectionColor={'white'}
+        autoCapitalize='none'
       />
       <TextInput
         onChangeText={(text: any) => setpassword(text)}

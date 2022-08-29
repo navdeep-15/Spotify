@@ -130,7 +130,7 @@ export default function Premium(props: any) {
           }
         </View>
       </ScrollView>
-      <MiniPlayer />
+      {/* <MiniPlayer /> */}
     </View>
   )
 }

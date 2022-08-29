@@ -32,7 +32,7 @@ export default function Home(props: any) {
           </TouchableOpacity>
         </View>
       </View>
-      <MiniPlayer />
+      {/* <MiniPlayer /> */}
     </LinearGradient>
   )
 }

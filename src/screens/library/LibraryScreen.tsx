@@ -40,7 +40,7 @@ export default function Library() {
       <ScrollView showsVerticalScrollIndicator={false}>
 
       </ScrollView>
-      <MiniPlayer />
+      {/* <MiniPlayer /> */}
     </View>
   )
 }

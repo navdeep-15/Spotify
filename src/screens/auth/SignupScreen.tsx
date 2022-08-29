@@ -63,6 +63,7 @@ export default function Signup(props: any) {
         placeholderTextColor={'gray'}
         style={styles.inputText}
         selectionColor={'white'}
+        autoCapitalize='none'
       />
       <TextInput
         onChangeText={(text: any) => setNumber(text)}
