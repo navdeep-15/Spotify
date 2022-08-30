@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "330146167767",
+    "project_id": "spotify-a0d1c",
+    "storage_bucket": "spotify-a0d1c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:330146167767:android:9c1ed75027765f670e6992",
+        "android_client_info": {
+          "package_name": "com.learningproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "330146167767-8fhvq2gr3k2lndrhltsterkpribn527b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.learningproject",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "330146167767-8tnmj713gjnn2253mg0ham1in54l3tik.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9VyE8vq29fEoBf84ggqbRp3L_KgMQIBE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "330146167767-8tnmj713gjnn2253mg0ham1in54l3tik.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "330146167767-onvnm9oqdf75bf5ngqdehrir86nc7j47.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.LearningProject.com"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
