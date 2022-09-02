@@ -20,18 +20,23 @@ export default function SettingsScreen(props: any) {
   }
 
   const onPressLogOut = () => {
-    auth().signOut().then(() => {
-      common?.snackBar('User signed out!')
-      dispatch({
-        type: actionNames?.AUTH_REDUCER,
-        payload: {
-          loginInfo: {
-            status: false,
-            currentUser: {},
+    auth().signOut()
+      .then(() => {
+        common?.snackBar('User signed out!')
+        dispatch({
+          type: actionNames?.AUTH_REDUCER,
+          payload: {
+            loginInfo: {
+              status: false,
+              currentUser: {},
+            }
           }
-        }
+        })
       })
-    });
+      .catch(error => {
+        console.error(error);
+
+      })
   }
 
   return (

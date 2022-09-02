@@ -6,11 +6,14 @@ import localImages from '@navdeep/utils/localImages'
 import screenNames from '@navdeep/utils/screenNames'
 import common from '@navdeep/utils/common'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import auth from '@react-native-firebase/auth';
 import actionNames from '@navdeep/utils/actionNames'
+import { setLoaderState } from '@navdeep/actions'
+import Loader from '@navdeep/components/Loader'
 
 export default function Login(props: any) {
+  const { isLoading } = useSelector((state: any) => state?.authReducer);
 
   const [email, setemail] = useState<string>('')
   const [password, setpassword] = useState<string>('')
@@ -70,6 +73,8 @@ export default function Login(props: any) {
    * @description SIGNIN USING EMAIL & PASSWORD (FIREBASE)
    */
   const onSignInWithFirebase = async () => {
+    //@ts-ignore
+    dispatch(setLoaderState(true))
     let payload = { email, password }
     let errorType = common?.validateInput('signin', payload)
     if (errorType?.length)
@@ -89,12 +94,15 @@ export default function Login(props: any) {
             }
           })
           /*************** CODE FOR SAVE DATA IN ASYNC STORAGE *****************/
+          //@ts-ignore
+          dispatch(setLoaderState(false))
         })
         .catch(error => {
           common?.snackBar('Error while Signing in')
           console.error(error);
         });
     }
+
   }
 
   return (
@@ -133,6 +141,7 @@ export default function Login(props: any) {
         Don't have an account?{' '}
         <Text style={{ textDecorationLine: 'underline', color: '#1cd05d' }} onPress={() => props?.navigation?.navigate(screenNames?.SIGNUP_SCREEN)}>SIGNUP</Text>
       </Text>
+      {isLoading ? <Loader /> : null}
     </View>
   )
 }

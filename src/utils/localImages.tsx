@@ -21,14 +21,6 @@ export default {
 
 
 
-
-
-
-
-
-
-
-
-
     SPOTIFY_LOGO_LOTTIE: require(`../assets/json/lottie_logo.json`),
+    LOADER: require(`../assets/json/loader.json`),
 };

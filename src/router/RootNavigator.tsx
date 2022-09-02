@@ -10,6 +10,7 @@ import common from '@navdeep/utils/common';
 import { getAccessToken } from '@navdeep/actions';
 import { navigationRef } from '@navdeep/utils/navigationService';
 import MiniPlayer from '@navdeep/components/MiniPlayer';
+import { setLoaderState } from '@navdeep/actions'
 
 export default function RootNavigator() {
     const dispatch = useDispatch()
@@ -19,6 +20,9 @@ export default function RootNavigator() {
 
         //@ts-ignore
         dispatch(getAccessToken())
+
+        //@ts-ignore
+        dispatch(setLoaderState(false))
 
         NetInfo.addEventListener(state => {
             dispatch({

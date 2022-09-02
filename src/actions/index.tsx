@@ -67,3 +67,14 @@ export function getBrowseCategoriesList(payload: any, callback = (data: any) => 
         )
     }
 }
+
+export function setLoaderState(state: any) {
+    return (dispatch: Function) => {
+        dispatch({
+            type: actionNames?.AUTH_REDUCER,
+            payload: {
+                isLoading: state
+            }
+        })
+    }
+}
