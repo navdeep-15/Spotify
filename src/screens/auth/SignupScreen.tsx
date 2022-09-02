@@ -46,8 +46,15 @@ export default function Signup(props: any) {
       common?.snackBar(`${errorType} is empty or invalid`)
     else {
       auth().createUserWithEmailAndPassword(email, password)
-        .then(() => {
+        .then(async () => {
           common?.snackBar('Signup Successfull')
+          /*************** CODE FOR SAVE DATA IN ASYNC STORAGE *****************/
+          try {
+            await AsyncStorage.setItem(email, JSON.stringify(payload))
+          } catch (error) {
+            console.error(error);
+          }
+          /*************** CODE FOR SAVE DATA IN ASYNC STORAGE *****************/
         })
         .catch(error => {
           if (error.code === 'auth/email-already-in-use')
