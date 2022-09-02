@@ -68,7 +68,7 @@ function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={<SplashComponent />} persistor={persistor}>
-        <StatusBar backgroundColor="#121212"/>
+        <StatusBar backgroundColor="#121212" barStyle="light-content" translucent={true}/>
         {
           // showSplash ?
           //   <SplashComponent /> :
