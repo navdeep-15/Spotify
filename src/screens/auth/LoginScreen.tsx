@@ -7,6 +7,7 @@ import screenNames from '@navdeep/utils/screenNames'
 import common from '@navdeep/utils/common'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch } from 'react-redux'
+import auth from '@react-native-firebase/auth';
 import actionNames from '@navdeep/utils/actionNames'
 
 export default function Login(props: any) {
@@ -28,6 +29,10 @@ export default function Login(props: any) {
     return () => backHandler.remove();
   }, []);
 
+  /**
+   * @function onSignIn
+   * @description NORMAL SIGNIN USING ASYNC STORAGE REACT NATIVE
+   */
   const onSignIn = async () => {
     let payload = { email, password }
     let errorType = common?.validateInput('signin', payload)
@@ -57,6 +62,38 @@ export default function Login(props: any) {
       } catch (error) {
         console.warn(error);
       }
+    }
+  }
+
+  /**
+   * @function onSignInWithFirebase
+   * @description SIGNIN USING EMAIL & PASSWORD (FIREBASE)
+   */
+  const onSignInWithFirebase = async () => {
+    let payload = { email, password }
+    let errorType = common?.validateInput('signin', payload)
+    if (errorType?.length)
+      common?.snackBar(`${errorType} is empty or invalid`)
+    else {
+      auth().signInWithEmailAndPassword(email, password)
+        .then(() => {
+          common?.snackBar('Signin Successfull')
+          /*************** CODE FOR SAVE USER DATA IN ASYNC STORAGE *****************/
+          dispatch({
+            type: actionNames?.AUTH_REDUCER,
+            payload: {
+              loginInfo: {
+                status: true,
+                currentUser: payload,
+              }
+            }
+          })
+          /*************** CODE FOR SAVE DATA IN ASYNC STORAGE *****************/
+        })
+        .catch(error => {
+          common?.snackBar('Error while Signing in')
+          console.error(error);
+        });
     }
   }
 

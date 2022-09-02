@@ -6,8 +6,12 @@ import localImages from '@navdeep/utils/localImages'
 import common from '@navdeep/utils/common'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import auth from '@react-native-firebase/auth';
+import { useDispatch } from 'react-redux'
+import actionNames from '@navdeep/utils/actionNames'
 
 export default function Signup(props: any) {
+
+  const dispatch = useDispatch()
 
   const [name, setName] = useState<string>('')
   const [email, setemail] = useState<string>('')
@@ -46,14 +50,18 @@ export default function Signup(props: any) {
       common?.snackBar(`${errorType} is empty or invalid`)
     else {
       auth().createUserWithEmailAndPassword(email, password)
-        .then(async () => {
+        .then(() => {
           common?.snackBar('Signup Successfull')
-          /*************** CODE FOR SAVE DATA IN ASYNC STORAGE *****************/
-          try {
-            await AsyncStorage.setItem(email, JSON.stringify(payload))
-          } catch (error) {
-            console.error(error);
-          }
+          /*************** CODE FOR SAVE USER DATA IN ASYNC STORAGE *****************/
+          dispatch({
+            type: actionNames?.AUTH_REDUCER,
+            payload: {
+              loginInfo: {
+                status: true,
+                currentUser: { ...payload, name: 'user name' },
+              }
+            }
+          })
           /*************** CODE FOR SAVE DATA IN ASYNC STORAGE *****************/
         })
         .catch(error => {
