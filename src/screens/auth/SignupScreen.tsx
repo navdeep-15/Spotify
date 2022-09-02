@@ -127,7 +127,7 @@ export default function Signup(props: any) {
         selectionColor={'white'}
         secureTextEntry={true}
       />
-      <TouchableOpacity style={styles.loginBtn} onPress={onSignUp}>
+      <TouchableOpacity style={styles.loginBtn} onPress={onSignUpWithFirebase}>
         <Text style={styles.loginBtnText}>SIGN UP</Text>
       </TouchableOpacity>
     </View>

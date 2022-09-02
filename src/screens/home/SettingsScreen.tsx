@@ -6,7 +6,9 @@ import { vw, vh } from '@navdeep/utils/dimensions'
 import screenNames from '@navdeep/utils/screenNames'
 import { useDispatch, useSelector } from 'react-redux'
 import actionNames from '@navdeep/utils/actionNames'
+import auth from '@react-native-firebase/auth';
 import DeviceInfo from 'react-native-device-info';
+import common from '@navdeep/utils/common'
 
 export default function SettingsScreen(props: any) {
   const dispatch = useDispatch()
@@ -18,15 +20,18 @@ export default function SettingsScreen(props: any) {
   }
 
   const onPressLogOut = () => {
-    dispatch({
-      type: actionNames?.AUTH_REDUCER,
-      payload: {
-        loginInfo: {
-          status: false,
-          currentUser: {},
+    auth().signOut().then(() => {
+      common?.snackBar('User signed out!')
+      dispatch({
+        type: actionNames?.AUTH_REDUCER,
+        payload: {
+          loginInfo: {
+            status: false,
+            currentUser: {},
+          }
         }
-      }
-    })
+      })
+    });
   }
 
   return (
