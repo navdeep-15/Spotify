@@ -58,7 +58,7 @@ export default function Signup(props: any) {
             payload: {
               loginInfo: {
                 status: true,
-                currentUser: { ...payload, name: 'user name' },
+                currentUser: payload,
               }
             }
           })

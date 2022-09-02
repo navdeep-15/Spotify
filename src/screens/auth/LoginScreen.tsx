@@ -84,7 +84,7 @@ export default function Login(props: any) {
             payload: {
               loginInfo: {
                 status: true,
-                currentUser: payload,
+                currentUser: { ...payload, name: 'user name' }
               }
             }
           })
