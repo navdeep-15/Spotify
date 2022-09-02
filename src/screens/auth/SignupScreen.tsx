@@ -5,6 +5,7 @@ import { vw, vh } from '@navdeep/utils/dimensions'
 import localImages from '@navdeep/utils/localImages'
 import common from '@navdeep/utils/common'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import auth from '@react-native-firebase/auth';
 
 export default function Signup(props: any) {
 
@@ -13,6 +14,10 @@ export default function Signup(props: any) {
   const [number, setNumber] = useState<string>('')
   const [password, setpassword] = useState<string>('')
 
+  /**
+   * @function onSignUp
+   * @description NORMAL SIGNUP USING ASYNC STORAGE REACT NATIVE
+   */
   const onSignUp = async () => {
     let payload = { name, email, number, password }
     let errorType = common?.validateInput('signup', payload)
@@ -25,8 +30,32 @@ export default function Signup(props: any) {
         props?.navigation?.goBack()
       } catch (error) {
         common?.snackBar('Error while Signing-up')
-        console.warn(error);
+        console.error(error);
       }
+    }
+  }
+
+  /**
+   * @function onSignUpWithFirebase
+   * @description SIGNUP USING EMAIL & PASSWORD (FIREBASE)
+   */
+  const onSignUpWithFirebase = async () => {
+    let payload = { name, email, number, password }
+    let errorType = common?.validateInput('signup', payload)
+    if (errorType?.length)
+      common?.snackBar(`${errorType} is empty or invalid`)
+    else {
+      auth().createUserWithEmailAndPassword(email, password)
+        .then(() => {
+          common?.snackBar('Signup Successfull')
+        })
+        .catch(error => {
+          if (error.code === 'auth/email-already-in-use')
+            common?.snackBar('That email address is already in use!')
+          if (error.code === 'auth/invalid-email')
+            common?.snackBar('That email address is invalid!')
+          console.error(error);
+        });
     }
   }
 
@@ -95,7 +124,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#121212',
     paddingHorizontal: vw(20),
-    paddingTop:vh(25)
+    paddingTop: vh(25)
   },
   titleText: {
     fontSize: vw(28),
