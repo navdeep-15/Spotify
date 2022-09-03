@@ -8,6 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import auth from '@react-native-firebase/auth';
 import { useDispatch } from 'react-redux'
 import actionNames from '@navdeep/utils/actionNames'
+import firestore from '@react-native-firebase/firestore';
 
 export default function Signup(props: any) {
 
@@ -51,8 +52,8 @@ export default function Signup(props: any) {
     else {
       auth().createUserWithEmailAndPassword(email, password)
         .then(() => {
-          common?.snackBar('Signup Successfull')
-          /*************** CODE FOR SAVE USER DATA IN ASYNC STORAGE *****************/
+          common?.snackBar('Signup Successful')
+          /*************** CODE FOR SAVE USER DATA IN REDUCER AND FIRESTORE *****************/
           dispatch({
             type: actionNames?.AUTH_REDUCER,
             payload: {
@@ -62,7 +63,11 @@ export default function Signup(props: any) {
               }
             }
           })
-          /*************** CODE FOR SAVE DATA IN ASYNC STORAGE *****************/
+          firestore().collection('UsersList').doc(payload?.email).set(payload)
+            .then(() => {
+              console.log('User added!');
+            });
+          /*************** CODE FOR SAVE DATA IN REDUCER AND FIRESTORE *****************/
         })
         .catch(error => {
           if (error.code === 'auth/email-already-in-use')

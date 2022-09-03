@@ -11,6 +11,7 @@ import auth from '@react-native-firebase/auth';
 import actionNames from '@navdeep/utils/actionNames'
 import { setLoaderState } from '@navdeep/actions'
 import Loader from '@navdeep/components/Loader'
+import firestore from '@react-native-firebase/firestore';
 
 export default function Login(props: any) {
   const { isLoading } = useSelector((state: any) => state?.authReducer);
@@ -82,8 +83,13 @@ export default function Login(props: any) {
     else {
       auth().signInWithEmailAndPassword(email, password)
         .then(() => {
-          common?.snackBar('Signin Successfull')
-          /*************** CODE FOR SAVE USER DATA IN ASYNC STORAGE *****************/
+          common?.snackBar('Signin Successful')
+          /*************** CODE FOR GET FROM FIRESTORE AND SAVE USER DATA IN REDUCER *****************/
+          firestore().collection('UsersList').doc(payload?.email).get()
+            .then((res) => {
+              console.log('get data -->', res);
+
+            })
           dispatch({
             type: actionNames?.AUTH_REDUCER,
             payload: {
