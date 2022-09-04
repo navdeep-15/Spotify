@@ -6,25 +6,53 @@ import localImages from '@navdeep/utils/localImages'
 import common from '@navdeep/utils/common'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import auth from '@react-native-firebase/auth';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import actionNames from '@navdeep/utils/actionNames'
 import firestore from '@react-native-firebase/firestore';
+import OtpInput from '@navdeep/components/OtpInput'
+import { setLoaderState } from '@navdeep/actions'
+import Loader from '@navdeep/components/Loader'
 
 export default function OtpScreen(props: any) {
 
-    // useEffect(() => {
-    //     (async () => {
-    //         let x = await auth().signInWithPhoneNumber('+918287601852')
-    //     })();
-    // }, [])
+    const dispatch = useDispatch()
+
+    const { isLoading } = useSelector((state: any) => state?.authReducer);
+
+    const [confirm, setConfirm] = useState<any>(null);
+    const [OTP, setOTP] = useState<any>(null)
+
+    useEffect(() => {
+        (async () => {
+            const confirmation = await auth().signInWithPhoneNumber('+91' + props?.route?.params?.number)
+            setConfirm(confirmation)
+        })();
+    }, [])
 
     const onPressNext = async () => {
-        // let errorType = common?.validateInput('signInUsingNumber', { number })
-        // if (errorType?.length)
-        //     common?.snackBar(`${errorType} is empty or invalid`)
-        // else {
-        //     console.log('phone login res-->>', x);
-        // }
+        try {
+            //@ts-ignore
+            dispatch(setLoaderState(true))
+            let response = await confirm.confirm(OTP);
+            if (response?.user?._user?.uid?.length > 0) {
+                dispatch({
+                    type: actionNames?.AUTH_REDUCER,
+                    payload: {
+                        loginInfo: {
+                            status: true,
+                            currentUser: { name: '+91 ' + props?.route?.params?.number }
+                        }
+                    }
+                })
+            }
+        } catch (error) {
+            common?.snackBar(`Invalid OTP`)
+            console.log('error of OTP-->>', error);
+        }
+        finally {
+            //@ts-ignore
+            dispatch(setLoaderState(false))
+        }
     }
 
     return (
@@ -36,11 +64,12 @@ export default function OtpScreen(props: any) {
                 />
             </TouchableOpacity>
             <Text style={styles.loginText}>Enter your code</Text>
+            <OtpInput setOTP={(value: any) => setOTP(value)} />
             <Text style={styles.termsText}>
                 We sent an SMS with a 6-digit code to{'\n'}
                 {props?.route?.params?.number ?? ''}
             </Text>
-            <TouchableOpacity style={true ? { ...styles.nextBtn, backgroundColor: "gray" } : styles.nextBtn} onPress={onPressNext} disabled={true}>
+            <TouchableOpacity style={!OTP ? { ...styles.nextBtn, backgroundColor: "gray" } : styles.nextBtn} onPress={onPressNext} disabled={!OTP}>
                 <Text style={styles.nextBtnText}>Next</Text>
             </TouchableOpacity>
             <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'center', marginTop: vh(40), }} onPress={() => props?.navigation?.goBack()}>
@@ -50,6 +79,7 @@ export default function OtpScreen(props: any) {
                 />
                 <Text style={styles.editPhoneText}>Edit phone number</Text>
             </TouchableOpacity>
+            {isLoading ? <Loader /> : null}
         </View>
     )
 }

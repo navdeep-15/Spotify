@@ -15,7 +15,7 @@ export default function PhoneNumberLoginScreen(props: any) {
         if (errorType?.length)
             common?.snackBar(`${errorType} is empty or invalid`)
         else {
-            props?.navigation?.navigate(screenNames?.OTP_SCREEN,{number})
+            props?.navigation?.navigate(screenNames?.OTP_SCREEN, { number })
         }
     }
 
