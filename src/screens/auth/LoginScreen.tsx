@@ -102,21 +102,6 @@ export default function Login(props: any) {
     }
   }
 
-  /**
-   * @function onSignInWithPhoneNumberFirebase
-   * @description SIGNIN USING PHONE NUMBER (FIREBASE)
-   */
-  const onSignInWithPhoneNumberFirebase = async () => {
-    // auth().signInWithPhoneNumber('+918287601852')
-    // .then((res:any)=>{
-    //   console.log('phone login res-->>',res);
-
-    // }).catch((error)=>console.log('eror-->>',error)
-    // )
-    let x = await auth().signInWithPhoneNumber('+918287601852')
-    console.log('phone login res-->>', x);
-  }
-
   return (
     <View style={styles.container}>
       <TouchableOpacity style={{ marginTop: vh(40) }} onPress={() => props?.navigation?.goBack()}>

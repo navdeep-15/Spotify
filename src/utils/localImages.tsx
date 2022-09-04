@@ -21,6 +21,7 @@ export default {
     GOOGLE: require(`${fixedPath}google.png`),
     FACEBOOK: require(`${fixedPath}facebook.png`),
     ARTIST_BACKGROUND: require(`${fixedPath}artist_background.png`),
+    EDIT_PEN: require(`${fixedPath}editpen.png`),
 
 
 

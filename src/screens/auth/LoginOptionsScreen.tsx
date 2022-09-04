@@ -24,7 +24,7 @@ export default function LoginOptionsScreen(props: any) {
     }
 
     const onPressContinueWithPhoneNumber = () => {
-
+        props?.navigation?.navigate(screenNames?.PHONE_NUMBER_LOGIN_SCREEN)
     }
 
     const onPressContinueWithGoogle = () => {

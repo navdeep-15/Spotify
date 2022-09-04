@@ -26,6 +26,10 @@ const validateInput = (type: any, payload: any) => {
         else if (!regex.passwordPattern.test(payload?.password))
             errorType = 'Password'
     }
+    else if (type === 'signInUsingNumber') {
+        if (!regex.numberPattern.test(payload?.number))
+            errorType = 'Phone Number'
+    }
     else {
         if (!regex.emailPattern.test(payload?.email))
             errorType = 'Email'
