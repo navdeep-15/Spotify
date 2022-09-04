@@ -97,8 +97,12 @@ export default function Login(props: any) {
         })
         .catch(error => {
           common?.snackBar('Error while Signing in')
-          console.error(error);
-        });
+          console.log(error);
+        })
+        .finally(() => {
+          //@ts-ignore
+          dispatch(setLoaderState(false))
+        })
     }
   }
 

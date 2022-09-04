@@ -5,7 +5,15 @@ import { vw, vh } from '@navdeep/utils/dimensions'
 import localImages from '@navdeep/utils/localImages'
 import screenNames from '@navdeep/utils/screenNames'
 
+import auth from '@react-native-firebase/auth';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import common from '@navdeep/utils/common'
+import { useDispatch } from 'react-redux'
+import actionNames from '@navdeep/utils/actionNames'
+
 export default function LoginOptionsScreen(props: any) {
+
+    const dispatch = useDispatch()
 
     useEffect(() => {
         const backAction = () => {
@@ -19,6 +27,13 @@ export default function LoginOptionsScreen(props: any) {
         return () => backHandler.remove();
     }, []);
 
+    useEffect(() => {
+        GoogleSignin.configure({
+            webClientId: '330146167767-8fhvq2gr3k2lndrhltsterkpribn527b.apps.googleusercontent.com',
+        });
+    }, [])
+
+
     const onPressSignUpFree = () => {
         props?.navigation?.navigate(screenNames?.SIGNUP_SCREEN)
     }
@@ -27,7 +42,37 @@ export default function LoginOptionsScreen(props: any) {
         props?.navigation?.navigate(screenNames?.PHONE_NUMBER_LOGIN_SCREEN)
     }
 
-    const onPressContinueWithGoogle = () => {
+    const onPressContinueWithGoogle = async () => {
+        GoogleSignin.signIn()
+            .then((res: any) => {
+                const googleCredential = auth.GoogleAuthProvider.credential(res?.idToken);
+                auth().signInWithCredential(googleCredential)
+                    .then((response: any) => {
+                        console.log('response of google signin', response);
+                        if (response?.user?._user?.uid?.length > 0) {
+                            dispatch({
+                                type: actionNames?.AUTH_REDUCER,
+                                payload: {
+                                    loginInfo: {
+                                        status: true,
+                                        currentUser: { name: response?.user?._user?.displayName, email: response?.user?._user?.email }
+                                    }
+                                }
+                            })
+                        }
+                        common?.snackBar(`Signin successful`)
+                    })
+                    .catch((error) => {
+                        console.log('error while signing in', error);
+                        common?.snackBar(`error while signing in`)
+                    })
+            })
+            .catch((e) => {
+                console.log('error while fetching user', e);
+                common?.snackBar(`error while fetching user`)
+            })
+
+
 
     }
 

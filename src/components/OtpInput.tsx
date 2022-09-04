@@ -30,7 +30,7 @@ export default function OtpInput(props: any) {
                     text?.length ? p2.current.focus() : null
                 }}
                 value={OTP.p1}
-                style={styles.numberInputText}
+                style={OTP.p1 ? {...styles.numberInputText,borderColor:'#1cd05d'} :styles.numberInputText}
                 keyboardType='numeric'
                 selectionColor={'white'}
                 maxLength={1}
@@ -42,7 +42,7 @@ export default function OtpInput(props: any) {
                     text?.length ? p3.current.focus() : null
                 }}
                 value={OTP.p2}
-                style={styles.numberInputText}
+                style={OTP.p2 ? {...styles.numberInputText,borderColor:'#1cd05d'} :styles.numberInputText}
                 keyboardType='numeric'
                 selectionColor={'white'}
                 maxLength={1}
@@ -54,7 +54,7 @@ export default function OtpInput(props: any) {
                     text?.length ? p4.current.focus() : null
                 }}
                 value={OTP.p3}
-                style={styles.numberInputText}
+                style={OTP.p3 ? {...styles.numberInputText,borderColor:'#1cd05d'} :styles.numberInputText}
                 keyboardType='numeric'
                 selectionColor={'white'}
                 maxLength={1}
@@ -66,7 +66,7 @@ export default function OtpInput(props: any) {
                     text?.length ? p5.current.focus() : null
                 }}
                 value={OTP.p4}
-                style={styles.numberInputText}
+                style={OTP.p4 ? {...styles.numberInputText,borderColor:'#1cd05d'} :styles.numberInputText}
                 keyboardType='numeric'
                 selectionColor={'white'}
                 maxLength={1}
@@ -78,7 +78,7 @@ export default function OtpInput(props: any) {
                     text?.length ? p6.current.focus() : null
                 }}
                 value={OTP.p5}
-                style={styles.numberInputText}
+                style={OTP.p5 ? {...styles.numberInputText,borderColor:'#1cd05d'} :styles.numberInputText}
                 keyboardType='numeric'
                 selectionColor={'white'}
                 maxLength={1}
@@ -89,7 +89,7 @@ export default function OtpInput(props: any) {
                     setOTP({ ...OTP, p6: text })
                 }}
                 value={OTP.p6}
-                style={styles.numberInputText}
+                style={OTP.p6 ? {...styles.numberInputText,borderColor:'#1cd05d'} :styles.numberInputText}
                 keyboardType='numeric'
                 selectionColor={'white'}
                 maxLength={1}

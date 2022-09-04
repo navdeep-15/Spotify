@@ -55,6 +55,7 @@ export default function PhoneNumberLoginScreen(props: any) {
                         placeholderTextColor={'lightgray'}
                         style={styles.numberInputText}
                         selectionColor={'white'}
+                        maxLength={10}
                     />
                 </View>
             </View>
@@ -103,6 +104,7 @@ const styles = StyleSheet.create({
         fontFamily: fonts.BOLD,
         color: 'white',
         padding: vw(12),
+        width: vw(250)
     },
     termsText: {
         fontSize: vw(12.5),

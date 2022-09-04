@@ -1,14 +1,12 @@
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import fonts from '@navdeep/utils/fonts'
 import { vw, vh } from '@navdeep/utils/dimensions'
 import localImages from '@navdeep/utils/localImages'
 import common from '@navdeep/utils/common'
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import auth from '@react-native-firebase/auth';
 import { useDispatch, useSelector } from 'react-redux'
 import actionNames from '@navdeep/utils/actionNames'
-import firestore from '@react-native-firebase/firestore';
 import OtpInput from '@navdeep/components/OtpInput'
 import { setLoaderState } from '@navdeep/actions'
 import Loader from '@navdeep/components/Loader'
