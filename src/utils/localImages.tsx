@@ -17,6 +17,10 @@ export default {
     PLAY: require(`${fixedPath}play.png`),
     PAUSE: require(`${fixedPath}pause.png`),
     CROSS: require(`${fixedPath}cross.png`),
+    PHONE: require(`${fixedPath}phone.png`),
+    GOOGLE: require(`${fixedPath}google.png`),
+    FACEBOOK: require(`${fixedPath}facebook.png`),
+    ARTIST_BACKGROUND: require(`${fixedPath}artist_background.png`),
 
 
 

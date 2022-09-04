@@ -21,18 +21,6 @@ export default function Login(props: any) {
 
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    const backAction = () => {
-      Alert.alert('Hold On', 'Are you sure you want to exit', [
-        { text: "No", onPress: () => null, style: "cancel" },
-        { text: 'Yes', onPress: () => BackHandler.exitApp() }
-      ]);
-      return true;
-    };
-    const backHandler = BackHandler.addEventListener("hardwareBackPress", backAction);
-    return () => backHandler.remove();
-  }, []);
-
   /**
    * @function onSignIn
    * @description NORMAL SIGNIN USING ASYNC STORAGE REACT NATIVE
@@ -70,10 +58,10 @@ export default function Login(props: any) {
   }
 
   /**
-   * @function onSignInWithFirebase
+   * @function onSignInWithEmailPasswordFirebase
    * @description SIGNIN USING EMAIL & PASSWORD (FIREBASE)
    */
-  const onSignInWithFirebase = async () => {
+  const onSignInWithEmailPasswordFirebase = async () => {
     //@ts-ignore
     dispatch(setLoaderState(true))
     let payload = { email, password }
@@ -87,7 +75,8 @@ export default function Login(props: any) {
       auth().signInWithEmailAndPassword(email, password)
         .then(() => {
           common?.snackBar('Signin Successful')
-          /*************** CODE FOR GET FROM FIRESTORE AND SAVE USER DATA IN REDUCER *****************/
+
+          /**** CODE FOR GET FROM FIRESTORE AND SAVE USER DATA IN REDUCER ****/
           firestore().collection('UsersList').doc(payload?.email).get()
             .then((response: any) => {
               let userData = response?._data
@@ -101,7 +90,8 @@ export default function Login(props: any) {
                 }
               })
             })
-          /*************** CODE FOR SAVE DATA IN ASYNC STORAGE *****************/
+          /**** CODE FOR GET FROM FIRESTORE AND SAVE USER DATA IN REDUCER ****/
+
           //@ts-ignore
           dispatch(setLoaderState(false))
         })
@@ -112,9 +102,30 @@ export default function Login(props: any) {
     }
   }
 
+  /**
+   * @function onSignInWithPhoneNumberFirebase
+   * @description SIGNIN USING PHONE NUMBER (FIREBASE)
+   */
+  const onSignInWithPhoneNumberFirebase = async () => {
+    // auth().signInWithPhoneNumber('+918287601852')
+    // .then((res:any)=>{
+    //   console.log('phone login res-->>',res);
+
+    // }).catch((error)=>console.log('eror-->>',error)
+    // )
+    let x = await auth().signInWithPhoneNumber('+918287601852')
+    console.log('phone login res-->>', x);
+  }
+
   return (
     <View style={styles.container}>
-      <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'center', marginTop: vh(80) }}>
+      <TouchableOpacity style={{ marginTop: vh(40) }} onPress={() => props?.navigation?.goBack()}>
+        <Image
+          source={localImages?.BACK}
+          style={{ width: vw(35), height: vw(35) }}
+        />
+      </TouchableOpacity>
+      <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'center', marginTop: vh(40) }}>
         <Image
           source={localImages?.APP_LOGO}
           style={{ width: vw(55), height: vw(55) }}
@@ -141,7 +152,7 @@ export default function Login(props: any) {
         selectionColor={'white'}
         secureTextEntry={true}
       />
-      <TouchableOpacity style={styles.loginBtn} onPress={onSignInWithFirebase}>
+      <TouchableOpacity style={styles.loginBtn} onPress={onSignInWithEmailPasswordFirebase}>
         <Text style={styles.loginBtnText}>LOG IN</Text>
       </TouchableOpacity>
       <Text style={styles.bottomText}>
