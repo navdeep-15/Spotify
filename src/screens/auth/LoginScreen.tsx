@@ -78,27 +78,29 @@ export default function Login(props: any) {
     dispatch(setLoaderState(true))
     let payload = { email, password }
     let errorType = common?.validateInput('signin', payload)
-    if (errorType?.length)
+    if (errorType?.length) {
       common?.snackBar(`${errorType} is empty or invalid`)
+      //@ts-ignore
+      dispatch(setLoaderState(false))
+    }
     else {
       auth().signInWithEmailAndPassword(email, password)
         .then(() => {
           common?.snackBar('Signin Successful')
           /*************** CODE FOR GET FROM FIRESTORE AND SAVE USER DATA IN REDUCER *****************/
           firestore().collection('UsersList').doc(payload?.email).get()
-            .then((res) => {
-              console.log('get data -->', res);
-
+            .then((response: any) => {
+              let userData = response?._data
+              dispatch({
+                type: actionNames?.AUTH_REDUCER,
+                payload: {
+                  loginInfo: {
+                    status: true,
+                    currentUser: userData
+                  }
+                }
+              })
             })
-          dispatch({
-            type: actionNames?.AUTH_REDUCER,
-            payload: {
-              loginInfo: {
-                status: true,
-                currentUser: { ...payload, name: 'user name' }
-              }
-            }
-          })
           /*************** CODE FOR SAVE DATA IN ASYNC STORAGE *****************/
           //@ts-ignore
           dispatch(setLoaderState(false))
@@ -108,7 +110,6 @@ export default function Login(props: any) {
           console.error(error);
         });
     }
-
   }
 
   return (

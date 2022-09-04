@@ -22,7 +22,7 @@ export default function SettingsScreen(props: any) {
   const onPressLogOut = () => {
     auth().signOut()
       .then(() => {
-        common?.snackBar('User signed out!')
+        common?.snackBar('Signed out successfully!')
         dispatch({
           type: actionNames?.AUTH_REDUCER,
           payload: {
