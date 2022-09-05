@@ -23,6 +23,7 @@ export default function OtpScreen(props: any) {
     useEffect(() => {
         (async () => {
             const confirmation = await auth().signInWithPhoneNumber('+91' + props?.route?.params?.number)
+            console.log('confirmation-->',confirmation);
             setConfirm(confirmation)
         })();
     }, [])

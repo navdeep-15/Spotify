@@ -29,7 +29,7 @@ export default function LoginOptionsScreen(props: any) {
 
     useEffect(() => {
         GoogleSignin.configure({
-            webClientId: '330146167767-8fhvq2gr3k2lndrhltsterkpribn527b.apps.googleusercontent.com',
+            webClientId: '330146167767-8tnmj713gjnn2253mg0ham1in54l3tik.apps.googleusercontent.com',
         });
     }, [])
 

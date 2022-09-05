@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "330146167767-8fhvq2gr3k2lndrhltsterkpribn527b.apps.googleusercontent.com",
+          "client_id": "330146167767-v6arpopapftc861skhb2dsp7c12qpspn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.learningproject",
-            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+            "certificate_hash": "2228cc512e6d376cc960c8d0073ab79f7117b5b4"
           }
         },
         {
