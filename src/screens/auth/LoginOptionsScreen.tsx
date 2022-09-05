@@ -4,12 +4,14 @@ import fonts from '@navdeep/utils/fonts'
 import { vw, vh } from '@navdeep/utils/dimensions'
 import localImages from '@navdeep/utils/localImages'
 import screenNames from '@navdeep/utils/screenNames'
-
-import auth from '@react-native-firebase/auth';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import common from '@navdeep/utils/common'
 import { useDispatch } from 'react-redux'
 import actionNames from '@navdeep/utils/actionNames'
+
+import auth from '@react-native-firebase/auth';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
+
 
 export default function LoginOptionsScreen(props: any) {
 
@@ -71,13 +73,32 @@ export default function LoginOptionsScreen(props: any) {
                 console.log('error while fetching user', e);
                 common?.snackBar(`error while fetching user`)
             })
-
-
-
     }
 
-    const onPressContinueWithFacebook = () => {
+    const onPressContinueWithFacebook = async () => {
+        const result = await LoginManager.logInWithPermissions(['public_profile', 'email']);
 
+        if (result.isCancelled) {
+            throw 'User cancelled the login process';
+        }
+
+        const data = await AccessToken.getCurrentAccessToken();
+
+        if (!data) {
+            throw 'Something went wrong obtaining access token';
+        }
+
+        const facebookCredential = auth.FacebookAuthProvider.credential(data.accessToken);
+
+        auth().signInWithCredential(facebookCredential)
+            .then((response: any) => {
+                console.log('response of facebook',response);
+                
+            })
+            .catch((error: any) => {
+                console.log('error while signing with facebook', error);
+
+            })
     }
 
     const onPressLogin = () => {
