@@ -5,17 +5,21 @@ import { vw, vh } from '@navdeep/utils/dimensions'
 import localImages from '@navdeep/utils/localImages'
 import screenNames from '@navdeep/utils/screenNames'
 import common from '@navdeep/utils/common'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import actionNames from '@navdeep/utils/actionNames'
+import { setLoaderState } from '@navdeep/actions'
 
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
+import Loader from '@navdeep/components/Loader'
 
 
 export default function LoginOptionsScreen(props: any) {
 
     const dispatch = useDispatch()
+
+    const { isLoading } = useSelector((state: any) => state?.authReducer);
 
     useEffect(() => {
         const backAction = () => {
@@ -45,6 +49,8 @@ export default function LoginOptionsScreen(props: any) {
     }
 
     const onPressContinueWithGoogle = async () => {
+        //@ts-ignore
+        dispatch(setLoaderState(true))
         GoogleSignin.signIn()
             .then((res: any) => {
                 const googleCredential = auth.GoogleAuthProvider.credential(res?.idToken);
@@ -61,43 +67,61 @@ export default function LoginOptionsScreen(props: any) {
                                     }
                                 }
                             })
+                            //@ts-ignore
+                            dispatch(setLoaderState(false))
+                            common?.snackBar(`Signin successful`)
                         }
-                        common?.snackBar(`Signin successful`)
                     })
                     .catch((error) => {
+                        //@ts-ignore
+                        dispatch(setLoaderState(false))
                         console.log('error while signing in', error);
                         common?.snackBar(`error while signing in`)
                     })
             })
             .catch((e) => {
+                //@ts-ignore
+                dispatch(setLoaderState(false))
                 console.log('error while fetching user', e);
                 common?.snackBar(`error while fetching user`)
             })
     }
 
     const onPressContinueWithFacebook = async () => {
+        //@ts-ignore
+        dispatch(setLoaderState(true))
         const result = await LoginManager.logInWithPermissions(['public_profile', 'email']);
-
         if (result.isCancelled) {
             throw 'User cancelled the login process';
         }
-
         const data = await AccessToken.getCurrentAccessToken();
-
         if (!data) {
             throw 'Something went wrong obtaining access token';
         }
-
         const facebookCredential = auth.FacebookAuthProvider.credential(data.accessToken);
-
         auth().signInWithCredential(facebookCredential)
             .then((response: any) => {
-                console.log('response of facebook',response);
-                
+                console.log('response of facebook', response);
+                if (response?.user?._user?.uid?.length > 0) {
+                    dispatch({
+                        type: actionNames?.AUTH_REDUCER,
+                        payload: {
+                            loginInfo: {
+                                status: true,
+                                currentUser: { name: response?.user?._user?.displayName, email: response?.user?._user?.email }
+                            }
+                        }
+                    })
+                    //@ts-ignore
+                    dispatch(setLoaderState(false))
+                    common?.snackBar(`Signin successful`)
+                }
             })
             .catch((error: any) => {
+                //@ts-ignore
+                dispatch(setLoaderState(false))
                 console.log('error while signing with facebook', error);
-
+                common?.snackBar(`error while signing in`)
             })
     }
 
@@ -151,6 +175,7 @@ export default function LoginOptionsScreen(props: any) {
                     <Text style={styles.btnText}>Log in</Text>
                 </TouchableOpacity>
             </View>
+            {isLoading ? <Loader /> : null}
         </View>
     )
 }
