@@ -22,6 +22,8 @@ export default {
     FACEBOOK: require(`${fixedPath}facebook.png`),
     ARTIST_BACKGROUND: require(`${fixedPath}artist_background.png`),
     EDIT_PEN: require(`${fixedPath}editpen.png`),
+    FINGERPRINT: require(`${fixedPath}fingerprint.png`),
+    FACE_ID: require(`${fixedPath}faceid.png`),
 
 
 

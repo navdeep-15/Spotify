@@ -1134,6 +1134,8 @@ PODS:
   - React-jsinspector (0.69.2)
   - React-logger (0.69.2):
     - glog
+  - react-native-biometrics (2.2.2):
+    - React
   - react-native-config (1.4.6):
     - react-native-config/App (= 1.4.6)
   - react-native-config/App (1.4.6):
@@ -1320,6 +1322,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
+  - react-native-biometrics (from `../node_modules/react-native-biometrics`)
   - react-native-config (from `../node_modules/react-native-config`)
   - react-native-fbsdk-next (from `../node_modules/react-native-fbsdk-next`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
@@ -1454,6 +1457,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   React-logger:
     :path: "../node_modules/react-native/ReactCommon/logger"
+  react-native-biometrics:
+    :path: "../node_modules/react-native-biometrics"
   react-native-config:
     :path: "../node_modules/react-native-config"
   react-native-fbsdk-next:
@@ -1586,6 +1591,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 7c23e92591431ac925f430b3118de934cb816ac0
   React-jsinspector: 31e53f048cc8f32605de36981903a7bbf9456892
   React-logger: 9a6c684d5cd56c4129e0c2842dba75c4bfb1e981
+  react-native-biometrics: 4aec6978534944b5f830b9c3489b721c906ea70b
   react-native-config: 7cd105e71d903104e8919261480858940a6b9c0e
   react-native-fbsdk-next: d6e1c6ad1693c891add104ab529d96906784ba9c
   react-native-netinfo: 129bd99f607a2dc5bb096168f3e5c150fd1f1c95

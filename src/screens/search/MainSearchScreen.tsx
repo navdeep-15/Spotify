@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, StatusBar, TouchableOpacity, Image, TextInput, FlatList,SafeAreaView } from 'react-native'
+import { StyleSheet, Text, View, StatusBar, TouchableOpacity, Image, TextInput, FlatList, SafeAreaView, Platform } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { vh, vw } from '@navdeep/utils/dimensions'
 import fonts from '@navdeep/utils/fonts'
@@ -58,7 +58,7 @@ export default function MainSearch(props: any) {
   }
 
   return (
-    <SafeAreaView style={{backgroundColor:'#575757'}}>
+    <SafeAreaView style={{ backgroundColor: '#575757' }}>
       <StatusBar backgroundColor={'#2a2a2a'} />
       <View style={styles.searchView}>
         <TouchableOpacity onPress={() => {
@@ -243,6 +243,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#575757',
     paddingHorizontal: vw(15),
     paddingVertical: vh(10),
+    marginTop: Platform.OS === 'android' ? vh(30) : null
   },
   textInput: {
     fontFamily: fonts.SEMIBOLD,

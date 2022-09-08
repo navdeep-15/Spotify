@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, Alert, BackHandler, ImageBackground, } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import fonts from '@navdeep/utils/fonts'
 import { vw, vh } from '@navdeep/utils/dimensions'
 import localImages from '@navdeep/utils/localImages'
@@ -13,13 +13,14 @@ import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
 import Loader from '@navdeep/components/Loader'
-
+import ReactNativeBiometrics from 'react-native-biometrics';
 
 export default function LoginOptionsScreen(props: any) {
 
     const dispatch = useDispatch()
 
     const { isLoading } = useSelector((state: any) => state?.authReducer);
+    const [sensorType, setsensorType] = useState('')
 
     useEffect(() => {
         const backAction = () => {
@@ -38,6 +39,31 @@ export default function LoginOptionsScreen(props: any) {
             webClientId: '330146167767-8tnmj713gjnn2253mg0ham1in54l3tik.apps.googleusercontent.com',
         });
     }, [])
+
+    useEffect(() => {
+        ReactNativeBiometrics.isSensorAvailable()
+            .then((response) => {
+                console.log('response of biometrics', response);
+                if (response?.available) {
+                    if (response?.biometryType === ReactNativeBiometrics.TouchID) {
+                        setsensorType('touchid')
+                    } else if (response?.biometryType === ReactNativeBiometrics.FaceID) {
+                        setsensorType('faceid')
+                    } else if (response?.biometryType === ReactNativeBiometrics.Biometrics) {
+                        setsensorType('biometric')
+                    }
+                }
+                else {
+                    common?.snackBar(`Sensor not available`)
+                    setTimeout(()=>common?.snackBar(response?.error),2000)
+                }
+            })
+            .catch((error) => {
+                console.log('error of biometrics', error);
+                common?.snackBar('error while checking sensor')
+            })
+    }, [])
+
 
 
     const onPressSignUpFree = () => {
@@ -125,6 +151,29 @@ export default function LoginOptionsScreen(props: any) {
             })
     }
 
+    const onPressContinueWithBiometrics = async () => {
+        let message = sensorType === 'biometric' ? 'Confirm fingerprint' : sensorType === 'faceid' ? 'Confirm FaceID' : 'Confirm TouchID'
+        ReactNativeBiometrics.simplePrompt({ promptMessage: message })
+            .then((response) => {
+                console.log('response of simplePrompt', response);
+                if (response?.success) {
+                    dispatch({
+                        type: actionNames?.AUTH_REDUCER,
+                        payload: {
+                            loginInfo: {
+                                status: true,
+                                currentUser: { name: 'Anonymous User', email: 'anonymous@anonymous.com' }
+                            }
+                        }
+                    })
+                    common?.snackBar(`Signin successful`)
+                }
+            })
+            .catch((error) => {
+                console.log('error of simplePrompt', error);
+            })
+    }
+
     const onPressLogin = () => {
         props?.navigation?.navigate(screenNames?.LOGIN_SCREEN)
     }
@@ -133,7 +182,7 @@ export default function LoginOptionsScreen(props: any) {
         <View style={styles.container}>
             <ImageBackground
                 source={localImages.ARTIST_BACKGROUND}
-                style={{ width: '100%', height: vh(400), }}
+                style={{ width: '100%', height: sensorType ? vh(350) : vh(400), }}
                 resizeMode='cover'
             >
                 <View style={{ alignItems: 'center', position: 'absolute', alignSelf: 'center', bottom: vh(-40), }}>
@@ -171,6 +220,20 @@ export default function LoginOptionsScreen(props: any) {
                     />
                     <Text style={{ ...styles.btnText, flex: 1 }}>Continue with Facebook</Text>
                 </TouchableOpacity>
+                {
+                    sensorType ?
+                        <TouchableOpacity style={styles.socialSignInBtn} onPress={onPressContinueWithBiometrics}>
+                            <Image
+                                source={(sensorType === 'faceid') ? localImages.FACE_ID : localImages.FINGERPRINT}
+                                style={{ width: vw(25), height: vh(25), tintColor: (sensorType === 'faceid') ? 'skyblue' : null }}
+                            />
+                            <Text style={{ ...styles.btnText, flex: 1 }}>
+                                {
+                                    sensorType === 'biometric' ? 'Continue with Fingerprint' : sensorType === 'faceid' ? 'Continue with FaceID' : 'Continue with TouchID'
+                                }
+                            </Text>
+                        </TouchableOpacity> : null
+                }
                 <TouchableOpacity style={styles.logInBtn} onPress={onPressLogin}>
                     <Text style={styles.btnText}>Log in</Text>
                 </TouchableOpacity>

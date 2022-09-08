@@ -49,14 +49,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#121212',
-    paddingTop: Platform?.OS === 'ios' ? vh(40) : vh(25),
+    paddingTop: vh(40),
     paddingHorizontal: vw(20)
   },
   screenHeading: {
     fontSize: vw(24),
     fontFamily: fonts.BOLD,
     color: 'white',
-    //marginBottom:vh(18)
   },
   nameImage: {
     width: vw(25),

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Image, FlatList, ScrollView, Switch } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Image, FlatList, ScrollView, Switch, Platform } from 'react-native'
 import React from 'react'
 import localImages from '@navdeep/utils/localImages'
 import fonts from '@navdeep/utils/fonts'
@@ -20,29 +20,41 @@ export default function SettingsScreen(props: any) {
   }
 
   const onPressLogOut = () => {
-    auth().signOut()
-      .then(() => {
-        common?.snackBar('Signed out successfully!')
-        dispatch({
-          type: actionNames?.AUTH_REDUCER,
-          payload: {
-            loginInfo: {
-              status: false,
-              currentUser: {},
-            }
+    if (loginInfo?.currentUser?.email?.includes('anonymous')) {
+      dispatch({
+        type: actionNames?.AUTH_REDUCER,
+        payload: {
+          loginInfo: {
+            status: false,
+            currentUser: {},
           }
+        }
+      })
+    }
+    else {
+      auth().signOut()
+        .then(() => {
+          common?.snackBar('Signed out successfully!')
+          dispatch({
+            type: actionNames?.AUTH_REDUCER,
+            payload: {
+              loginInfo: {
+                status: false,
+                currentUser: {},
+              }
+            }
+          })
         })
-      })
-      .catch(error => {
-        console.error(error);
-
-      })
+        .catch(error => {
+          console.error(error);
+        })
+    }
   }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#121212' }}>
 
-      <View style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: vh(10) }}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: vh(10), marginTop: Platform.OS === 'android' ? vh(40) : null }}>
         <TouchableOpacity onPress={() => props?.navigation?.goBack()}>
           <Image
             source={localImages?.BACK}
@@ -168,7 +180,8 @@ const styles = StyleSheet.create({
     fontSize: vw(12),
     fontFamily: fonts.REGULAR,
     color: 'white',
-    letterSpacing: vw(0.8)
+    letterSpacing: vw(0.8),
+    marginTop: vh(6)
   },
   listHeading: {
     fontSize: vw(18),

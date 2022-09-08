@@ -31,6 +31,7 @@
     "react": "18.0.0",
     "react-native": "0.69.2",
     "react-native-base64": "^0.2.1",
+    "react-native-biometrics": "^2.2.2",
     "react-native-code-push": "^7.0.4",
     "react-native-config": "^1.4.6",
     "react-native-device-info": "^10.0.2",

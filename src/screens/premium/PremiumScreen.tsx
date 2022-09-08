@@ -181,6 +181,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#121212',
+    paddingTop: vh(16)
   },
   heading: {
     fontSize: vw(28),

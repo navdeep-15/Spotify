@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#121212',
     paddingHorizontal: vw(20),
-    paddingTop: Platform?.OS === 'ios' ? vh(40) : vh(25)
+    paddingTop: vh(40)
   },
   screenHeading: {
     fontSize: vw(24),

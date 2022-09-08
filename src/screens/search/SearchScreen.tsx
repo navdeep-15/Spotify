@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#121212',
-    paddingTop: Platform?.OS === 'ios' ? vh(16) : null
+    paddingTop: vh(16)
   },
   screenHeading: {
     marginTop: vh(25),
