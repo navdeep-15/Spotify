@@ -13,36 +13,16 @@ import MiniPlayer from '@navdeep/components/MiniPlayer';
 import { setLoaderState } from '@navdeep/actions'
 
 export default function RootNavigator() {
-    const dispatch = useDispatch()
     const { loginInfo } = useSelector((state: any) => state?.authReducer);
-
-    useEffect(() => {
-
-        //@ts-ignore
-        dispatch(getAccessToken())
-
-        //@ts-ignore
-        dispatch(setLoaderState(false))
-
-        NetInfo.addEventListener(state => {
-            dispatch({
-                type: actionNames?.AUTH_REDUCER,
-                payload: {
-                    isConnectedToInternet: state.isConnected
-                }
-            })
-            !state.isConnected ? common?.snackBar(`You're offline, please check your internet`, true) : null
-        });
-    }, [])
-
-    return (
-        <NavigationContainer ref={navigationRef}>
-            {
-                loginInfo?.status ? <BottomNavigator /> : <AuthNavigator />
-            }
-            {
-                loginInfo?.status ? <MiniPlayer /> : null
-            }
-        </NavigationContainer>
-    )
+    // return (
+    //     <NavigationContainer ref={navigationRef}>
+    //         {
+    //             loginInfo?.status ? <BottomNavigator /> : <AuthNavigator />
+    //         }
+    //         {
+    //             loginInfo?.status ? <MiniPlayer /> : null
+    //         }
+    //     </NavigationContainer>
+    // )
+    return loginInfo?.status ? <BottomNavigator /> : <AuthNavigator />
 }
