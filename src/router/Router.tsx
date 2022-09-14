@@ -10,6 +10,7 @@ import actionNames from '@navdeep/utils/actionNames';
 import common from '@navdeep/utils/common';
 import { getAccessToken } from '@navdeep/actions';
 import { setLoaderState } from '@navdeep/actions'
+import CodePushScreen from '@navdeep/screens/welcome/CodePushScreen';
 
 const Stack = createNativeStackNavigator()
 
@@ -38,6 +39,7 @@ export default function Router() {
         <NavigationContainer>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
                 <Stack.Screen name={screenNames?.SPLASH_SCREEN} component={SplashScreen} />
+                <Stack.Screen name={screenNames?.CODEPUSH_SCREEN} component={CodePushScreen} />
                 <Stack.Screen name={screenNames?.ROOT_NAVIGATOR} component={RootNavigator} />
             </Stack.Navigator>
         </NavigationContainer>

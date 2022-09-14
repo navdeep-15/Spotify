@@ -2,6 +2,7 @@ import regex from '@navdeep/utils/regex'
 import Snackbar from 'react-native-snackbar'
 import Config from 'react-native-config';
 import axios from 'axios'
+import codePush from 'react-native-code-push'
 
 const axiosInstance: any = axios.create({
     baseURL: Config.BASE_URL_CONSOLE,
@@ -46,10 +47,21 @@ const snackBar = (text: any, isInfinite?: any) => {
     });
 }
 
+const checkForUpdate = async () => {
+    const response = await codePush.checkForUpdate();
+    console.log('response of codepush checking for update-->>',response);
+    
+    if (response && !response?.failedInstall)
+        return true
+    else
+        return false
+}
+
 
 export default {
     validateInput,
     snackBar,
     setAuthorizationToken,
     axiosInstance,
+    checkForUpdate
 }

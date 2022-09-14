@@ -2,7 +2,7 @@
     <string name="app_name">LearningProject</string>
     <string name="appCenterCrashes_whenToSendCrashes" moduleConfig="true" translatable="false">DO_NOT_ASK_JAVASCRIPT</string>
     <string name="appCenterAnalytics_whenToEnableAnalytics" moduleConfig="true" translatable="false">ALWAYS_SEND</string>
-    <string moduleConfig="true" name="CodePushDeploymentKey">j6r7qcaet8iIcRgSdJgzNpcUHVGeRWqz6RGEv</string>
+    <string moduleConfig="true" name="CodePushDeploymentKey">KFBzSzzoCKByuKveKMJOgf1xtHusW2f8C3K7V</string>
     <string name="facebook_app_id">608254017417482</string>
     <string name="facebook_client_token">f9d96402d4049e61c4f5a20084133e43</string>
 </resources>

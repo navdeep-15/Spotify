@@ -11,7 +11,8 @@
     "pod": "cd ios && pod install && cd ..",
     "_android": "cd ./android && ./gradlew app:assembleRelease",
     "apk": "cd ./android/app/build/outputs/apk/release && open . ",
-    "codepush": "appcenter codepush release-react -a navdeep15/LearningProject -d Production"
+    "codepush_android": "appcenter codepush release-react -a navdeep15/LearningProject-android -d Production",
+    "codepush_ios": "appcenter codepush release-react -a navdeep15/LearningProject-iOS -d Production"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.17.7",
