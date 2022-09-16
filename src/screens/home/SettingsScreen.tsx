@@ -64,7 +64,7 @@ export default function SettingsScreen(props: any) {
         <Text style={styles.screenHeading}>Settings</Text>
       </View>
 
-      <ScrollView style={{ paddingHorizontal: vw(20), marginBottom: vh(80), }} showsVerticalScrollIndicator={false}>
+      <ScrollView style={{ paddingHorizontal: vw(20), marginBottom: Platform?.OS === 'ios' ? vh(30) : vh(80), }} showsVerticalScrollIndicator={false}>
         <Text style={styles.screenHeading2}>Free Account</Text>
 
         <TouchableOpacity style={styles.premiumBtn} onPress={() => onPressTermsConditions('https://www.spotify.com/us/purchase/offer/2022-q3-global-trial-3m/?marketing-campaign-id=q3-2022&country=US')}>

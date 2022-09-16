@@ -84,6 +84,12 @@ export default function Premium(props: any) {
 
   return (
     <View style={styles.container}>
+      <TouchableOpacity
+        onPress={() => props?.navigation?.navigate(screenNames?.REACT_NATIVE_TOPICS_SCREEN)}
+        style={{ ...styles.freeView, marginTop: vh(50), backgroundColor: '#253166', borderWidth: vw(2), borderColor: '#4E95F1' }}>
+        <Text style={styles.freeText1}>React Native</Text>
+        <Text style={styles.freeText2}>MORE</Text>
+      </TouchableOpacity>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Text style={styles.heading}>Try Premium free for 1 month</Text>
         <Swiper

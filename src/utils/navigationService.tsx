@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-    NavigationAction,
-    NavigationState,
-} from '@react-navigation/native';
+import { NavigationAction, NavigationState } from '@react-navigation/native';
 
 export const navigationRef = React.createRef<any>();
 

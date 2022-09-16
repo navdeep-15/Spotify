@@ -1235,7 +1235,7 @@ PODS:
     - React-perflogger (= 0.69.2)
   - RNCAsyncStorage (1.17.10):
     - React-Core
-  - RNDeviceInfo (10.0.2):
+  - RNDeviceInfo (10.1.2):
     - React-Core
   - RNExitApp (1.1.0):
     - React
@@ -1611,7 +1611,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 8030b9cf9b9e87b878d92da680b55b5e74c58e70
   ReactCommon: a9414b91f0d19de002b55d9f4f6cb176d6dd8452
   RNCAsyncStorage: 0c357f3156fcb16c8589ede67cc036330b6698ca
-  RNDeviceInfo: 0a7c1d2532aa7691f9b9925a27e43af006db4dae
+  RNDeviceInfo: 4a2d995e05823cf364e8791bfa450d8f2f461c42
   RNExitApp: c4e052df2568b43bec8a37c7cd61194d4cfee2c3
   RNFBApp: a6fca2cd8f392b5efc1f2ab7bd4b3b64a6039abf
   RNFBAuth: e121a1a5b6e6df0348f62da9bf96e5b58fdffa01
