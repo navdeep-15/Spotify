@@ -6,6 +6,8 @@ import screenNames from '@navdeep/utils/screenNames'
 import Swiper from 'react-native-swiper'
 import LinearGradient from 'react-native-linear-gradient';
 import MiniPlayer from '@navdeep/components/MiniPlayer'
+import LottieView from 'lottie-react-native';
+import localImages from '@navdeep/utils/localImages'
 
 const horizontalData = [
   {
@@ -87,8 +89,15 @@ export default function Premium(props: any) {
       <TouchableOpacity
         onPress={() => props?.navigation?.navigate(screenNames?.REACT_NATIVE_TOPICS_SCREEN)}
         style={{ ...styles.freeView, marginTop: vh(50), backgroundColor: '#253166', borderWidth: vw(2), borderColor: '#4E95F1' }}>
+        <LottieView
+          resizeMode='contain'
+          source={localImages.REACT_LOGO}
+          autoPlay
+          loop
+          speed={2}
+          style={{ transform: [{ scale: 0.8 }]}}
+        />
         <Text style={styles.freeText1}>React Native</Text>
-        <Text style={styles.freeText2}>MORE</Text>
       </TouchableOpacity>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Text style={styles.heading}>Try Premium free for 1 month</Text>
