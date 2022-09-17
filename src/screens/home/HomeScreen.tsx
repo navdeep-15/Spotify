@@ -6,6 +6,7 @@ import localImages from '@navdeep/utils/localImages'
 import screenNames from '@navdeep/utils/screenNames'
 import fonts from '@navdeep/utils/fonts';
 import MiniPlayer from '@navdeep/components/MiniPlayer';
+import Player from '@navdeep/components/Player';
 
 export default function Home(props: any) {
   return (
@@ -33,6 +34,7 @@ export default function Home(props: any) {
         </View>
       </View>
       {/* <MiniPlayer /> */}
+      <Player/>
     </LinearGradient>
   )
 }

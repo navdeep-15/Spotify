@@ -24,6 +24,9 @@ export default {
     EDIT_PEN: require(`${fixedPath}editpen.png`),
     FINGERPRINT: require(`${fixedPath}fingerprint.png`),
     FACE_ID: require(`${fixedPath}faceid.png`),
+    NEXT_BACK: require(`${fixedPath}nextBackBtn.png`),
+    LOOP: require(`${fixedPath}loop.png`),
+    SHUFFLE: require(`${fixedPath}shuffle.png`),
 
 
 
