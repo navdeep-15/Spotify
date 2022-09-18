@@ -11,12 +11,14 @@ export default function ReactNativeTopicsScreen(props: any) {
         switch (id) {
             case 1: props?.navigation?.navigate(screenNames?.CHART_SCREEN)
                 break
+            case 2: props?.navigation?.navigate(screenNames?.MAPS_SCREEN)
+                break
             default: break
         }
     }
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#121212' }}>
-            <Header title={'React Native'} props={props}/>
+            <Header title={'React Native'} props={props} />
             <ScrollView>
                 {
                     buttonData?.map((item: any) => {
@@ -70,5 +72,10 @@ const buttonData = [
         id: 1,
         title: 'Chart',
         description: 'Line Graph and Pie Chart'
+    },
+    {
+        id: 2,
+        title: 'Maps',
+        description: 'Google maps'
     },
 ]

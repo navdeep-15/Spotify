@@ -5,4 +5,5 @@
     <string moduleConfig="true" name="CodePushDeploymentKey">KFBzSzzoCKByuKveKMJOgf1xtHusW2f8C3K7V</string>
     <string name="facebook_app_id">608254017417482</string>
     <string name="facebook_client_token">f9d96402d4049e61c4f5a20084133e43</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyD9VyE8vq29fEoBf84ggqbRp3L_KgMQIBE</string>
 </resources>

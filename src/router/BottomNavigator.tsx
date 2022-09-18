@@ -37,6 +37,8 @@ export default function BottomNavigator(props: any) {
                 return false
             case screenNames?.CHART_SCREEN:
                 return false
+            case screenNames?.MAPS_SCREEN:
+                return false
             default:
                 return true
         }

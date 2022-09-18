@@ -21,5 +21,6 @@ const styles = StyleSheet.create({
   headerStyle: {
     backgroundColor: '#121212',
     padding: vh(10),
+    marginTop:Platform.OS==='android' ? vh(20) : vh(0)
   }
 })
