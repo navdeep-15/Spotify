@@ -11,8 +11,8 @@ import MapView, { Marker } from 'react-native-maps';
 export default function MapsScreen(props: any) {
   const [searchText, setsearchText] = useState<string>('')
   const [location, setlocation] = useState<any>({
-    latitude: 197,
-    longitude: 100,
+    latitude: 28.704060,
+    longitude: 77.102493,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0221,
   })
@@ -27,12 +27,13 @@ export default function MapsScreen(props: any) {
           //   latitudeDelta: 0.0922,
           //   longitudeDelta: 0.0221,
           // }}
-          region={location}
+          //region={location}
           style={{ width: '100%', height: '80%', alignSelf: 'center' }}
           onRegionChange={region => setlocation(region)}
         >
           <Marker
-            key={0}
+            draggable
+            //key={0}
             coordinate={{
               latitude: location?.latitude ?? 0,
               longitude: location?.longitude ?? 0
