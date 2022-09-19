@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View, Image, SafeAreaView, TextInput, Platform, Modal } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, Image, SafeAreaView, TextInput, FlatList, Modal } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import fonts from '@navdeep/utils/fonts'
 import { vw, vh } from '@navdeep/utils/dimensions'
@@ -13,6 +13,7 @@ export default function MapsScreen(props: any) {
   const dispatch = useDispatch()
   const [searchText, setsearchText] = useState<string>('')
   const [showSearchModal, setshowSearchModal] = useState<any>(true)
+  const [locationData, setlocationData] = useState<any>([])
   const [location, setlocation] = useState<any>({
     latitude: 28.704060,
     longitude: 77.102493,
@@ -22,13 +23,17 @@ export default function MapsScreen(props: any) {
 
   useEffect(() => {
     if (searchText) {
-      let payload = { searchText }
+      let payload = { searchText, latitude: location?.latitude, longitude: location?.longitude }
       //@ts-ignore
       // dispatch(getLocationList(payload, (data: any) => {
 
       // }))
     }
   }, [searchText])
+
+  const handleLoadMore = () => {
+
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#121212' }}>
@@ -87,7 +92,23 @@ export default function MapsScreen(props: any) {
         visible={showSearchModal}
       >
         <View style={{ maxHeight: vh(200), backgroundColor: 'white', marginHorizontal: vw(20), marginTop: vh(95), borderRadius: vw(6), }}>
-
+          <FlatList
+            data={locationData ?? []}
+            renderItem={({ item, index }: any) => {
+              return (
+                <></>
+              )
+            }}
+            keyExtractor={(item: any) => item}
+            showsVerticalScrollIndicator={false}
+            onEndReachedThreshold={0.2}
+            onEndReached={handleLoadMore}
+            ListEmptyComponent={() => {
+              return (
+                <></>
+              )
+            }}
+          />
         </View>
       </Modal>
     </SafeAreaView>

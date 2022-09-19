@@ -39,19 +39,19 @@ export function getLocationList(payload: any, callback = (data: any) => { }) {
     return (dispatch: Function, getState: Function) => {
         axios.get('https://autosuggest.search.hereapi.com/v1/autosuggest', {
             params: {
-                at: '52.9317512.77165',
+                at: `${payload?.latitude},${payload?.longitude}`,
                 limit: 5,
                 lang: 'en',
                 q: payload?.searchText,
-                apiKey: ''
+                apiKey: Config?.HERE_MAP_API_KEY
             }
         })
             .then(response => {
-                console.log('response of location list : ', response);
+                console.log('response of Here Map location list : ', response);
             })
             .catch(error => {
-                console.log('error of location list : ', error);
-                common?.snackBar(error?.data?.error?.message ?? '')
+                console.log('error of Here Map location list : ', error);
+                //common?.snackBar(error?.data?.error?.message ?? '')
             })
     }
 }
