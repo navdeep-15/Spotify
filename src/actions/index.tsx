@@ -4,6 +4,7 @@ import common from "@navdeep/utils/common";
 import Config from 'react-native-config';
 import base64 from 'react-native-base64';
 import actionNames from "@navdeep/utils/actionNames";
+import axios from 'axios'
 
 export function getAccessToken() {
     return (dispatch: Function, getState: Function) => {
@@ -30,6 +31,27 @@ export function getAccessToken() {
             }).catch((error) => {
                 console.log('error of get access token ', error);
                 common?.snackBar(error?.data?.error?.message)
+            })
+    }
+}
+
+export function getLocationList(payload: any, callback = (data: any) => { }) {
+    return (dispatch: Function, getState: Function) => {
+        axios.get('https://autosuggest.search.hereapi.com/v1/autosuggest', {
+            params: {
+                at: '52.9317512.77165',
+                limit: 5,
+                lang: 'en',
+                q: payload?.searchText,
+                apiKey: ''
+            }
+        })
+            .then(response => {
+                console.log('response of location list : ', response);
+            })
+            .catch(error => {
+                console.log('error of location list : ', error);
+                common?.snackBar(error?.data?.error?.message ?? '')
             })
     }
 }

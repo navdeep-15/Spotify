@@ -1,76 +1,100 @@
-import { StyleSheet, Text, TouchableOpacity, View, Image, SafeAreaView, TextInput, Platform } from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet, Text, TouchableOpacity, View, Image, SafeAreaView, TextInput, Platform, Modal } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import fonts from '@navdeep/utils/fonts'
 import { vw, vh } from '@navdeep/utils/dimensions'
 import screenNames from '@navdeep/utils/screenNames'
 import localImages from '@navdeep/utils/localImages'
 import Header from '@navdeep/components/Header'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import MapView, { Marker } from 'react-native-maps';
+import { useDispatch } from 'react-redux'
+import { getLocationList } from '@navdeep/actions'
 
 export default function MapsScreen(props: any) {
+  const dispatch = useDispatch()
   const [searchText, setsearchText] = useState<string>('')
+  const [showSearchModal, setshowSearchModal] = useState<any>(true)
   const [location, setlocation] = useState<any>({
     latitude: 28.704060,
     longitude: 77.102493,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0221,
   })
+
+  useEffect(() => {
+    if (searchText) {
+      let payload = { searchText }
+      //@ts-ignore
+      // dispatch(getLocationList(payload, (data: any) => {
+
+      // }))
+    }
+  }, [searchText])
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#121212' }}>
-      <KeyboardAwareScrollView contentContainerStyle={{ flex: 1 }} keyboardShouldPersistTaps={'handled'}>
-        <Header title={'Maps'} props={props} />
-        <MapView
-          // initialRegion={{
-          //   latitude: 0,
-          //   longitude:0,
-          //   latitudeDelta: 0.0922,
-          //   longitudeDelta: 0.0221,
-          // }}
-          //region={location}
-          style={{ width: '100%', height: '80%', alignSelf: 'center' }}
-          onRegionChange={region => setlocation(region)}
-        >
-          <Marker
-            draggable
-            //key={0}
-            coordinate={{
-              latitude: location?.latitude ?? 0,
-              longitude: location?.longitude ?? 0
-            }}
-            title={'marker.title'}
-            description={'marker.description'}
-          />
-        </MapView>
-        <View style={styles.searchView}>
-          <TextInput
-            placeholder='Search'
-            placeholderTextColor='#bebebe'
-            style={styles.textInput}
-            value={searchText}
-            onChangeText={(text: any) => setsearchText(text)}
-            selectionColor={'#17bb3d'}
-          />
-          {
-            searchText?.length ?
-              <TouchableOpacity onPress={() => setsearchText('')}>
-                <Image
-                  source={localImages?.CROSS}
-                  style={{ width: vw(20), height: vw(20), alignSelf: 'center', tintColor: 'black' }}
-                />
-              </TouchableOpacity> :
-              <TouchableOpacity style={styles.searchBtn}>
-                <Image
-                  source={localImages?.SEARCH_UNFOCUSED}
-                  style={{ width: vw(20), height: vw(20), tintColor: 'white', alignSelf: 'center' }}
-                />
-              </TouchableOpacity>
-          }
+      <Header title={'Maps'} props={props} />
+      <View style={styles.searchView}>
+        <TextInput
+          placeholder='Search'
+          placeholderTextColor='#bebebe'
+          style={styles.textInput}
+          value={searchText}
+          onChangeText={(text: any) => setsearchText(text)}
+          selectionColor={'#17bb3d'}
+        />
+        {
+          searchText?.length ?
+            <TouchableOpacity onPress={() => setsearchText('')}>
+              <Image
+                source={localImages?.CROSS}
+                style={{ width: vw(20), height: vw(20), alignSelf: 'center', tintColor: 'black' }}
+              />
+            </TouchableOpacity> :
+            <TouchableOpacity style={styles.searchBtn}>
+              <Image
+                source={localImages?.SEARCH_UNFOCUSED}
+                style={{ width: vw(20), height: vw(20), tintColor: 'white', alignSelf: 'center' }}
+              />
+            </TouchableOpacity>
+        }
+      </View>
+      <MapView
+        // initialRegion={{
+        //   latitude: 0,
+        //   longitude:0,
+        //   latitudeDelta: 0.0922,
+        //   longitudeDelta: 0.0221,
+        // }}
+        //region={location}
+        style={{ width: '100%', height: '82%', alignSelf: 'center' }}
+        onRegionChange={region => setlocation(region)}
+      >
+        <Marker
+          draggable
+          //key={0}
+          coordinate={{
+            latitude: location?.latitude ?? 0,
+            longitude: location?.longitude ?? 0
+          }}
+          title={'marker.title'}
+          description={'marker.description'}
+        />
+      </MapView>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => setshowSearchModal(false)}
+        visible={showSearchModal}
+      >
+        <View style={{ maxHeight: vh(200), backgroundColor: 'white', marginHorizontal: vw(20), marginTop: vh(95), borderRadius: vw(6), }}>
+
         </View>
-      </KeyboardAwareScrollView>
+      </Modal>
     </SafeAreaView>
   )
 }
+
+
 
 const styles = StyleSheet.create({
   searchView: {
@@ -78,12 +102,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: 'white',
     paddingHorizontal: vw(15),
-    paddingVertical: vh(10),
+    paddingVertical: vh(6),
     marginHorizontal: vw(20),
-    borderRadius: vw(100),
+    borderRadius: vw(6),
     justifyContent: 'space-between',
-    position: 'absolute',
-    bottom: vh(20)
+    marginBottom: vh(20)
   },
   textInput: {
     fontFamily: fonts.SEMIBOLD,
