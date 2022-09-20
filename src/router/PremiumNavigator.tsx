@@ -9,9 +9,12 @@ import MapsScreen from '@navdeep/screens/premium/reactNativeScreens/MapsScreen';
 
 const Stack = createNativeStackNavigator()
 
-export default function PremiumNavigator() {
+export default function PremiumNavigator(props: any) {
+  const { toScreen } = props?.route?.params
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator
+      initialRouteName={toScreen}
+      screenOptions={{ headerShown: false }}>
       <Stack.Screen name={screenNames?.PREMIUM_SCREEN} component={Premium} />
       <Stack.Screen name={screenNames?.BROWSER_SCREEN} component={BrowserScreen} />
       <Stack.Screen name={screenNames?.REACT_NATIVE_TOPICS_SCREEN} component={ReactNativeTopicsScreen} />

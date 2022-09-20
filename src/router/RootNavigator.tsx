@@ -12,8 +12,9 @@ import { navigationRef } from '@navdeep/utils/navigationService';
 import MiniPlayer from '@navdeep/components/MiniPlayer';
 import { setLoaderState } from '@navdeep/actions'
 
-export default function RootNavigator() {
+export default function RootNavigator(props: any) {
     const { loginInfo } = useSelector((state: any) => state?.authReducer);
+    const { toScreen } = props?.route?.params
     // return (
     //     <NavigationContainer ref={navigationRef}>
     //         {
@@ -24,5 +25,8 @@ export default function RootNavigator() {
     //         }
     //     </NavigationContainer>
     // )
-    return loginInfo?.status ? <BottomNavigator /> : <AuthNavigator />
+    if (toScreen)
+        return <BottomNavigator toScreen={toScreen} />
+    else
+        return loginInfo?.status ? <BottomNavigator /> : <AuthNavigator />
 }

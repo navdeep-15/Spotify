@@ -46,6 +46,7 @@ export default function BottomNavigator(props: any) {
 
     return (
         <Tab.Navigator
+            initialRouteName={props?.toScreen ? screenNames?.PREMIUM_NAVIGATOR : screenNames?.HOME_NAVIGATOR}
             screenOptions={{
                 headerShown: false,
                 lazy: true,
@@ -97,6 +98,7 @@ export default function BottomNavigator(props: any) {
                     tabBarLabel: ({ focused }) => <Text style={focused ? { ...styles.tabBarLabelStyle, fontFamily: fonts.EXTRA_BOLD, color: 'white' } : styles.tabBarLabelStyle}>Premium</Text>,
                     tabBarIcon: ({ focused }) => <Image style={!focused ? styles.tabBarIcon : { ...styles.tabBarIcon, tintColor: 'white' }} source={focused ? localImages.PREMIUM : localImages.PREMIUM} />
                 }}
+                initialParams={props?.toScreen ? { toScreen: props?.toScreen } : {}}
             />
         </Tab.Navigator>
     )
