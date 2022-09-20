@@ -19,13 +19,13 @@ export default function ReactNativeTopicsScreen(props: any) {
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#121212' }}>
             <Header title={'React Native'} props={props} />
-            <ScrollView>
+            <ScrollView style={{marginTop:vh(5)}}>
                 {
                     buttonData?.map((item: any) => {
                         return (
                             <TouchableOpacity
                                 onPress={() => onPressButton(item?.id)}
-                                style={{ marginTop: vh(18), paddingHorizontal: vw(20) }}>
+                                style={{ marginTop: vh(35), paddingHorizontal: vw(20) }}>
                                 <Text style={styles.listHeading}>{item?.title ?? ''}</Text>
                                 <Text style={styles.listDesc} numberOfLines={2}>{item?.description}</Text>
                             </TouchableOpacity>

@@ -6,7 +6,7 @@ import fonts from '@navdeep/utils/fonts'
 
 export default function Header(props: any) {
     return (
-        <View style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: vh(10), marginTop: Platform.OS === 'android' ? vh(25) : null }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: vh(10), marginTop: Platform.OS === 'android' ? vh(40) : null }}>
             <TouchableOpacity onPress={() => props?.props?.navigation?.goBack()}>
                 <Image
                     source={localImages?.BACK}

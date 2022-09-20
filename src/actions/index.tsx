@@ -48,6 +48,14 @@ export function getLocationList(payload: any, callback = (data: any) => { }) {
         })
             .then(response => {
                 console.log('response of Here Map location list : ', response);
+                let arr = response?.data?.items?.map((item: any) => ({
+                    title: item?.address?.label,
+                    coordinate: {
+                        latitude: item?.position?.lat ?? 0,
+                        longitude: item?.position?.lng ?? 0,
+                    }
+                }))
+                callback(arr)
             })
             .catch(error => {
                 console.log('error of Here Map location list : ', error);
