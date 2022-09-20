@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View, Image, SafeAreaView, TextInput, FlatList, Keyboard } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, Image, SafeAreaView, TextInput, FlatList, Keyboard, Platform } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import fonts from '@navdeep/utils/fonts'
 import { vw, vh, screenWidth } from '@navdeep/utils/dimensions'
@@ -51,7 +51,7 @@ export default function MapsScreen(props: any) {
               <TouchableOpacity onPress={() => setsearchText('')}>
                 <Image
                   source={localImages?.CROSS}
-                  style={{ width: vw(20), height: vw(20), alignSelf: 'center', tintColor: 'black' }}
+                  style={{ width: vw(25), height: vw(25), alignSelf: 'center', tintColor: 'black' }}
                 />
               </TouchableOpacity> :
               <Image
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: 'white',
     paddingHorizontal: vw(15),
-    //paddingVertical: vh(6),
+    paddingVertical: Platform?.OS === 'ios' ? vh(6) : null,
     marginHorizontal: vw(20),
     borderRadius: vw(6),
     justifyContent: 'space-between',
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     borderRadius: vw(6),
     position: 'absolute',
     alignSelf: 'center',
-    top: vh(150)
+    top: Platform?.OS==='android' ? vh(150) : vh(85)
   },
   seperator: {
     borderWidth: vw(0.8),
