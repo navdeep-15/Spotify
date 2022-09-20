@@ -54,12 +54,10 @@ export default function MapsScreen(props: any) {
                   style={{ width: vw(20), height: vw(20), alignSelf: 'center', tintColor: 'black' }}
                 />
               </TouchableOpacity> :
-              <TouchableOpacity style={styles.searchBtn}>
-                <Image
-                  source={localImages?.SEARCH_UNFOCUSED}
-                  style={{ width: vw(20), height: vw(20), tintColor: 'white', alignSelf: 'center' }}
-                />
-              </TouchableOpacity>
+              <Image
+                source={localImages?.SEARCH_UNFOCUSED}
+                style={{ width: vw(25), height: vw(25), alignSelf: 'center' }}
+              />
           }
         </View>
         <MapView
@@ -92,6 +90,7 @@ export default function MapsScreen(props: any) {
                       style={{ paddingHorizontal: vw(12), paddingVertical: vh(10) }}
                       onPress={() => {
                         setmarkerCoordinates(item?.coordinate)
+                        setlocationData([])
                       }}>
                       <Text style={styles.locationText}>{item?.title}</Text>
                     </TouchableOpacity>
@@ -117,7 +116,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: 'white',
     paddingHorizontal: vw(15),
-    paddingVertical: vh(6),
+    //paddingVertical: vh(6),
     marginHorizontal: vw(20),
     borderRadius: vw(6),
     justifyContent: 'space-between',
