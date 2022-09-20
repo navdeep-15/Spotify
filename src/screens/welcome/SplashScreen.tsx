@@ -36,7 +36,10 @@ export default function SplashScreen(props: any) {
 
         {/************************** BACKGROUND STATE ***************************/ }
         dynamicLinks().getInitialLink()
-            .then(link => onFetchDynamicLink(link))
+            .then(link => {
+                console.log('DYNAMIC LINK (BACKGROUND): ', link);
+                onFetchDynamicLink(link)
+            })
             .catch(error => {
                 console.log('Error while fetching dynamic link ', error);
             })
