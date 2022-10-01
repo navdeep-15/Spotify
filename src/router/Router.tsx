@@ -12,6 +12,7 @@ import { getAccessToken } from '@navdeep/actions';
 import { setLoaderState } from '@navdeep/actions'
 import CodePushScreen from '@navdeep/screens/welcome/CodePushScreen';
 import { navigationRef } from '@navdeep/utils/navigationService';
+import { AppState } from 'react-native';
 
 const Stack = createNativeStackNavigator()
 
@@ -26,6 +27,10 @@ export default function Router(linking: any) {
         //@ts-ignore
         dispatch(setLoaderState(false))
 
+        const appState = AppState.addEventListener('change', (state: any) => {
+            console.log('APP STATE : ', state);
+        });
+
         NetInfo.addEventListener(state => {
             dispatch({
                 type: actionNames?.AUTH_REDUCER,
@@ -35,7 +40,10 @@ export default function Router(linking: any) {
             })
             !state.isConnected ? common?.snackBar(`You're offline, please check your internet`, true) : null
         });
+
+        return () => appState.remove()
     }, [])
+
     return (
         <NavigationContainer linking={linking} ref={navigationRef}>
             <Stack.Navigator screenOptions={{ headerShown: false }}>

@@ -49,7 +49,7 @@ const snackBar = (text: any, isInfinite?: any) => {
 
 const checkForUpdate = async () => {
     const response = await codePush.checkForUpdate();
-    console.log('response of codepush checking for update-->>',response);
+    //console.log('response of codepush checking for update-->>',response);
     
     if (response && !response?.failedInstall)
         return true

@@ -18,7 +18,7 @@ const enhancer: any = compose(...enhancers);
 const persistConfig = {
     key: 'root',
     storage: AsyncStorage,
-    whitelist: ['authReducer', 'currentSongReducer', 'recentSearchesReducer'],
+    whitelist: ['authReducer', 'currentSongReducer', 'recentSearchesReducer', 'dynamicLinkReducer'],
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers)

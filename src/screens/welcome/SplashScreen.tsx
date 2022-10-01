@@ -3,10 +3,12 @@ import SplashComponent from '@navdeep/components/SplashComponent'
 import screenNames from '@navdeep/utils/screenNames'
 import common from '@navdeep/utils/common';
 import dynamicLinks from '@react-native-firebase/dynamic-links';
+import { useDispatch } from 'react-redux';
+import actionNames from '@navdeep/utils/actionNames';
 
 export default function SplashScreen(props: any) {
 
-    const [toScreen, settoScreen] = useState<any>('')
+    const dispatch = useDispatch()
 
     useEffect(() => {
         handleDynamicLink()
@@ -22,39 +24,46 @@ export default function SplashScreen(props: any) {
         }
         else {
             setTimeout(() => {
-                props?.navigation?.navigate(screenNames?.ROOT_NAVIGATOR, { toScreen })
+                props?.navigation?.navigate(screenNames?.ROOT_NAVIGATOR)
             }, 4000);
         }
     }
 
-    const handleDynamicLink = () => {
-        {/************************** FOREGROUND STATE ***************************/ }
-        dynamicLinks().onLink((link: any) => {
-            console.log('DYNAMIC LINK (FOREGROUND): ', link);
-            onFetchDynamicLink(link)
-        })
-
-        {/************************** BACKGROUND STATE ***************************/ }
-        dynamicLinks().getInitialLink()
-            .then(link => {
-                console.log('DYNAMIC LINK (BACKGROUND): ', link);
-                onFetchDynamicLink(link)
+    const handleDynamicLink = async () => {
+        const link = await dynamicLinks().getInitialLink()            // FOR BACKGROUND STATE
+        if (link?.url) {
+            console.log('DYNAMIC LINK (BACKGROUND): ', link);
+            const screenName = onFetchDynamicLink(link)
+            dispatch({
+                type: actionNames?.DYNAMIC_LINK_REDUCER,
+                payload: {
+                    screenName: screenName
+                }
             })
-            .catch(error => {
-                console.log('Error while fetching dynamic link ', error);
+        }
+        else {
+            dynamicLinks().onLink((link: any) => {                    // FOR FOREGROUND STATE
+                console.log('DYNAMIC LINK (FOREGROUND): ', link);
+                const screenName = onFetchDynamicLink(link)
+                dispatch({
+                    type: actionNames?.DYNAMIC_LINK_REDUCER,
+                    payload: {
+                        screenName: screenName
+                    }
+                })
             })
+        }
     }
 
     const onFetchDynamicLink = (link: any) => {
-        if (link?.url > 0) {
+        if (link?.url) {
             let screenName = link?.url?.split('?')?.[1]?.split('=')?.[1]
             switch (screenName) {
-                case 'mapsScreen': settoScreen(screenNames.MAPS_SCREEN)
-                    break;
-                default: settoScreen('')
-                    break;
+                case 'mapsScreen': return screenNames.MAPS_SCREEN
+                default: return ''
             }
         }
+        return ''
     }
 
     return (

@@ -16,6 +16,7 @@ export default function SplashComponent() {
                 source={localImages.SPOTIFY_LOGO_LOTTIE}
                 style={{ width: vw(200), height: vw(200) }}
                 autoPlay
+                loop={false}
             />
         </View>
     )
