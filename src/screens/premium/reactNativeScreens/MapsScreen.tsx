@@ -7,7 +7,7 @@ import localImages from '@navdeep/utils/localImages'
 import Header from '@navdeep/components/Header'
 import MapView, { Marker } from 'react-native-maps';
 import { useDispatch } from 'react-redux'
-import { getLocationList } from '@navdeep/actions'
+import { clearDynamicLinkReducer, getLocationList } from '@navdeep/actions'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 export default function MapsScreen(props: any) {
@@ -22,6 +22,11 @@ export default function MapsScreen(props: any) {
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0221,
   })
+
+  useEffect(() => {
+    //@ts-ignore
+    dispatch(clearDynamicLinkReducer)
+  }, [])
 
   useEffect(() => {
     if (searchText) {
@@ -142,7 +147,7 @@ const styles = StyleSheet.create({
     borderRadius: vw(6),
     position: 'absolute',
     alignSelf: 'center',
-    top: Platform?.OS==='android' ? vh(150) : vh(85)
+    top: Platform?.OS === 'android' ? vh(150) : vh(85)
   },
   seperator: {
     borderWidth: vw(0.8),

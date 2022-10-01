@@ -11,10 +11,13 @@ import SearchNavigator from './SearchNavigator';
 import LibraryNavigator from './LibraryNavigator';
 import PremiumNavigator from './PremiumNavigator';
 import * as navigationRef from '@navdeep/utils/navigationService'
+import { useSelector } from 'react-redux';
 
 const Tab = createBottomTabNavigator();
 
 export default function BottomNavigator(props: any) {
+    const { navigatorName } = useSelector((state: any) => state?.dynamicLinkReducer);
+
     useEffect(() => {
         const backAction = () => {
             Alert.alert('Hold On', 'Are you sure you want to exit', [
@@ -46,6 +49,7 @@ export default function BottomNavigator(props: any) {
 
     return (
         <Tab.Navigator
+            initialRouteName={navigatorName ?? screenNames?.HOME_NAVIGATOR}
             screenOptions={{
                 headerShown: false,
                 lazy: true,
