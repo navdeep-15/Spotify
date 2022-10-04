@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, FlatList, Modal, Image } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '@navdeep/components/Header'
 import { vh, vw } from '@navdeep/utils/dimensions'
 import fonts from '@navdeep/utils/fonts'
@@ -14,7 +14,23 @@ import Loader from '@navdeep/components/Loader'
 
 export default function StoryScreen(props: any) {
     const [showModal, setshowModal] = useState<boolean>(false)
+    const [storyData, setstoryData] = useState<any>([])
     const { isLoading } = useSelector((state: any) => state?.authReducer);
+
+    useEffect(() => {
+        const subscriber = firestore().collection('Story').onSnapshot(
+            (QuerySnapshot: any) => {
+                console.log('RESPONSE OF QUERY SNAPSHOT : ', QuerySnapshot);
+                let arr = QuerySnapshot?._docs?.map((item: any) => ({ url: item?._data?.url ?? '' }))
+                setstoryData(arr)
+            },
+            (error) => {
+                console.log('ERROR OF QUERY SNAPSHOT : ', error);
+            }
+        );
+        return () => subscriber();
+    }, [])
+
 
     const onAddButton = () => {
         setshowModal(true)
@@ -24,10 +40,10 @@ export default function StoryScreen(props: any) {
         <SafeAreaView style={{ flex: 1, backgroundColor: '#121212' }}>
             <Header title={'Story'} props={props} />
             <FlatList
-                data={[1, 2, 3, 4]}
-                renderItem={() => {
+                data={storyData}
+                renderItem={({ item }: any) => {
                     return (
-                        <StoryCard />
+                        <StoryCard url={item?.url ?? ''} />
                     )
                 }}
                 keyExtractor={(item: any) => item}
@@ -61,7 +77,10 @@ const StoryCard = (props: any) => {
                 end={{ x: 1, y: 1 }}
                 style={styles.gradientView}>
                 <View style={styles?.storyCard}>
-
+                    <Image
+                        style={{ width: '100%', height: '100%', borderRadius: vw(100) }}
+                        source={{ uri: props?.url }}
+                    />
                 </View>
             </LinearGradient>
         </TouchableOpacity>
