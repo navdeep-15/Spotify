@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, FlatList, Modal } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, FlatList, Modal, Image } from 'react-native'
 import React, { useState } from 'react'
 import Header from '@navdeep/components/Header'
 import { vh, vw } from '@navdeep/utils/dimensions'
@@ -6,9 +6,15 @@ import fonts from '@navdeep/utils/fonts'
 import LinearGradient from 'react-native-linear-gradient';
 import { launchCamera, launchImageLibrary, ImageLibraryOptions, CameraOptions } from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
+import common from '@navdeep/utils/common'
+import firestore from '@react-native-firebase/firestore';
+import { useDispatch, useSelector } from 'react-redux'
+import { setLoaderState } from '@navdeep/actions'
+import Loader from '@navdeep/components/Loader'
 
 export default function StoryScreen(props: any) {
     const [showModal, setshowModal] = useState<boolean>(false)
+    const { isLoading } = useSelector((state: any) => state?.authReducer);
 
     const onAddButton = () => {
         setshowModal(true)
@@ -41,6 +47,7 @@ export default function StoryScreen(props: any) {
                 props={props}
                 onRequestClose={() => setshowModal(false)}
             />
+            {isLoading ? <Loader /> : null}
         </SafeAreaView>
     )
 }
@@ -63,49 +70,91 @@ const StoryCard = (props: any) => {
 
 const AddStoryModal = (props: any) => {
 
+    const [url, seturl] = useState<any>('')
+    const dispatch = useDispatch()
+
     const onPressTakePhoto = async () => {
-        let options: CameraOptions = {
-            mediaType: 'mixed'
-        }
-        launchCamera(options, async (response: any) => {
-            console.log('Response of image camera= ', response);
+        let options: CameraOptions = { mediaType: 'mixed' }
+        launchCamera(options, (response: any) => {
             if (response.didCancel) {
                 console.log('User cancelled image picker');
             } else if (response.error) {
                 console.log('ImagePicker Error: ', response.error);
             } else {
-                try {
-                    let reference=await storage().ref('story/'+response?.assets?.[0]?.fileName ?? 'filename')
-                    if(reference){
-                        reference.putFile(response?.assets?.[0]?.uri)
-                    }
-                    // await storage().ref('story/'+response?.assets?.[0]?.fileName ?? 'filename').getDownloadURL().then((url)=>{
-                    //     console.log('downloaded url-->>',url);
-                        
-                    // })
-                } catch (error) {
-                    console.log(error);
-
-                }
+                //@ts-ignore
+                dispatch(setLoaderState(true))
+                uploadStoryToFireStore(response?.assets?.[0])
             }
         })
 
     }
 
     const onPressChooseFromGallery = () => {
-        let options: ImageLibraryOptions = {
-            mediaType: 'mixed'
-        }
+        let options: ImageLibraryOptions = { mediaType: 'mixed' }
         launchImageLibrary(options, (response: any) => {
-            console.log('Response of image gallery= ', response);
             if (response.didCancel) {
                 console.log('User cancelled image picker');
             } else if (response.error) {
                 console.log('ImagePicker Error: ', response.error);
             } else {
-                const source = { uri: response.uri };
+                //@ts-ignore
+                dispatch(setLoaderState(true))
+                uploadStoryToFireStore(response?.assets?.[0])
             }
         })
+    }
+
+    const uploadStoryToFireStore = (image: any) => {
+        console.log('SELECTED IMAGE INFORMATION : ', image);
+        try {
+            //UPLOADING MEDIA TO CLOUD STORAGE
+            storage().ref('story/' + image?.fileName ?? 'filename').putFile(image?.uri)
+                .then((response: any) => {
+                    console.log('RESPONSE AFTER UPLOADING IMAGE ON FIREBASE STORAGE : ', response);
+                    //GETTING DOWNLAODABLE URL FROM CLOUD STORAGE
+                    storage().ref('story/' + image?.fileName ?? 'filename').getDownloadURL()
+                        .then((response: any) => {
+                            console.log('URL AFTER FETCHING FROM STORAGE', response);
+                            seturl(response)
+                            //@ts-ignore
+                            dispatch(setLoaderState(false))
+                        })
+                        .catch((error: any) => {
+                            console.log('ERROR OF URL WHILE FETCHING FROM STORAGE', error);
+                        })
+                })
+                .catch((error: any) => {
+                    console.log('ERROR WHILE UPLOADING IMAGE ON FIREBASE STORAGE : ', error);
+                })
+        } catch (error) {
+            //@ts-ignore
+            dispatch(setLoaderState(false))
+            console.log('ERROR OF TRY-CATCH BLOCK', error);
+        }
+    }
+
+    const onPressUpload = () => {
+        if (url) {
+            //@ts-ignore
+            dispatch(setLoaderState(true))
+
+            // UPLOADING MEDIA URL ON FIRESTORE
+            firestore().collection('Story').doc().set({ url })
+                .then(() => {
+                    common.snackBar('Story uploaded')
+                    console.log('MEDIA UPLOADED ON FIRESTORE DB');
+                    //@ts-ignore
+                    dispatch(setLoaderState(false))
+                    seturl('')
+                    props?.onRequestClose()
+                })
+                .catch((error: any) => {
+                    //@ts-ignore
+                    dispatch(setLoaderState(false))
+                    common.snackBar('Error while uploading story')
+                    console.log('ERROR WHILE UPLOADING ON FIRESTORE DB', error);
+                })
+        }
     }
 
     return (
@@ -113,12 +162,29 @@ const AddStoryModal = (props: any) => {
             <TouchableOpacity onPress={() => props?.onRequestClose()} style={{ flex: 1 }} activeOpacity={1}>
                 <View style={styles.modalBackground}>
                     <View style={styles.horizontalLine} />
-                    <TouchableOpacity style={styles.modalBtn} onPress={onPressTakePhoto}>
-                        <Text style={styles.modalBtnText}>Take Photo</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.modalBtn} onPress={onPressChooseFromGallery}>
-                        <Text style={styles.modalBtnText}>Choose from Gallery</Text>
-                    </TouchableOpacity>
+                    <View style={styles.contentView}>
+                        {
+                            url ?
+                                <>
+                                    <Image
+                                        style={{ width: '100%', height: '100%', borderRadius: vw(12) }}
+                                        source={{ uri: url }}
+                                    />
+                                    <TouchableOpacity style={[styles.modalBtn, { position: 'absolute', bottom: vh(10) }]} onPress={onPressUpload}>
+                                        <Text style={styles.modalBtnText}>📤 Upload</Text>
+                                    </TouchableOpacity>
+                                </>
+                                :
+                                <>
+                                    <TouchableOpacity style={styles.modalBtn} onPress={onPressTakePhoto}>
+                                        <Text style={styles.modalBtnText}>Take Photo</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={styles.modalBtn} onPress={onPressChooseFromGallery}>
+                                        <Text style={styles.modalBtnText}>Choose from Gallery</Text>
+                                    </TouchableOpacity>
+                                </>
+                        }
+                    </View>
                 </View>
             </TouchableOpacity>
         </Modal>
@@ -158,14 +224,13 @@ const styles = StyleSheet.create({
     modalBackground: {
         borderTopLeftRadius: vw(12),
         borderTopRightRadius: vw(12),
-        borderBottomLeftRadius: vw(12),
-        borderBottomRightRadius: vw(12),
         height: vh(400),
         width: '100%',
         backgroundColor: 'white',
         position: 'absolute',
         bottom: 0,
-        paddingVertical: vh(15),
+        paddingTop: vh(15),
+        paddingBottom: vh(35),
         paddingHorizontal: vw(20)
     },
     horizontalLine: {
@@ -174,15 +239,14 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         width: vw(45),
         borderRadius: vw(100),
-        marginBottom: vh(10)
+        marginBottom: vh(15)
     },
     modalBtn: {
-        alignSelf: 'center',
         paddingVertical: vh(15),
         paddingHorizontal: vw(25),
         backgroundColor: '#29d637',
         borderRadius: vw(50),
-        marginBottom: vh(8)
+        marginVertical: vh(8)
     },
     modalBtnText: {
         fontSize: vw(14),
@@ -190,4 +254,14 @@ const styles = StyleSheet.create({
         textAlign: "center",
         color: 'white'
     },
+    contentView: {
+        width: '100%',
+        height: '100%',
+        borderWidth: vw(2),
+        borderRadius: vw(12),
+        borderStyle: 'dashed',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderColor: 'gray',
+    }
 })

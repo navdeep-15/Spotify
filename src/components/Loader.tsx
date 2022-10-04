@@ -19,7 +19,7 @@ const Loader = (props: any) => {
                             style={{ transform: [{ scale: 1.2 }] }}
                         />
                     </View>
-                    <Text style={styles.loaderText}>{'Please wait...'}</Text>
+                    {/* <Text style={styles.loaderText}>{'Please wait...'}</Text> */}
                 </View>
             </View>
         </Modal>
