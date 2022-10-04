@@ -8,6 +8,7 @@ import ChartScreen from '@navdeep/screens/premium/reactNativeScreens/ChartScreen
 import MapsScreen from '@navdeep/screens/premium/reactNativeScreens/MapsScreen';
 import { useSelector } from 'react-redux';
 import StoryScreen from '@navdeep/screens/premium/reactNativeScreens/StoryScreen';
+import StoryViewScreen from '@navdeep/screens/premium/reactNativeScreens/StoryViewScreen';
 
 const Stack = createNativeStackNavigator()
 
@@ -23,6 +24,7 @@ export default function PremiumNavigator(props: any) {
       <Stack.Screen name={screenNames?.CHART_SCREEN} component={ChartScreen} />
       <Stack.Screen name={screenNames?.MAPS_SCREEN} component={MapsScreen} />
       <Stack.Screen name={screenNames?.STORY_SCREEN} component={StoryScreen} />
+      <Stack.Screen name={screenNames?.STORY_VIEW_SCREEN} component={StoryViewScreen} />
     </Stack.Navigator>
   )
 }

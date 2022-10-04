@@ -44,6 +44,8 @@ export default function BottomNavigator(props: any) {
                 return false
             case screenNames?.STORY_SCREEN:
                 return false
+            case screenNames?.STORY_VIEW_SCREEN:
+                return false
             default:
                 return true
         }

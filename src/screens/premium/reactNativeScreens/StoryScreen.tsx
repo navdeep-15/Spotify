@@ -11,6 +11,7 @@ import firestore from '@react-native-firebase/firestore';
 import { useDispatch, useSelector } from 'react-redux'
 import { setLoaderState } from '@navdeep/actions'
 import Loader from '@navdeep/components/Loader'
+import screenNames from '@navdeep/utils/screenNames'
 
 export default function StoryScreen(props: any) {
     const [showModal, setshowModal] = useState<boolean>(false)
@@ -43,7 +44,7 @@ export default function StoryScreen(props: any) {
                 data={storyData}
                 renderItem={({ item }: any) => {
                     return (
-                        <StoryCard url={item?.url ?? ''} />
+                        <StoryCard url={item?.url ?? ''} navigation={props?.navigation} />
                     )
                 }}
                 keyExtractor={(item: any) => item}
@@ -70,7 +71,7 @@ export default function StoryScreen(props: any) {
 
 const StoryCard = (props: any) => {
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => props?.navigation?.navigate(screenNames.STORY_VIEW_SCREEN, { url: props?.url })}>
             <LinearGradient
                 colors={['#fefc75', '#88fa1e', '#29d637', '#238b1d', '#0a690b']}
                 start={{ x: 0, y: 0 }}
