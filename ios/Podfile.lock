@@ -1160,13 +1160,15 @@ PODS:
     - FBSDKGamingServicesKit (~> 14.1.0)
     - FBSDKShareKit (~> 14.1.0)
     - React-Core
-  - react-native-maps (1.3.1):
+  - react-native-image-picker (4.10.0):
     - React-Core
-  - react-native-netinfo (9.3.0):
+  - react-native-maps (1.3.2):
+    - React-Core
+  - react-native-netinfo (9.3.3):
     - React-Core
   - react-native-restart (0.0.24):
     - React-Core
-  - react-native-safe-area-context (4.3.3):
+  - react-native-safe-area-context (4.4.1):
     - RCT-Folly
     - RCTRequired
     - RCTTypeSafety
@@ -1244,23 +1246,23 @@ PODS:
     - React-perflogger (= 0.69.2)
   - RNCAsyncStorage (1.17.10):
     - React-Core
-  - RNDeviceInfo (10.1.2):
+  - RNDeviceInfo (10.2.0):
     - React-Core
   - RNExitApp (1.1.0):
     - React
-  - RNFBApp (15.5.0):
+  - RNFBApp (15.7.0):
     - Firebase/CoreOnly (= 9.6.0)
     - React-Core
-  - RNFBAuth (15.5.0):
+  - RNFBAuth (15.7.0):
     - Firebase/Auth (= 9.6.0)
     - React-Core
     - RNFBApp
-  - RNFBDynamicLinks (15.6.0):
+  - RNFBDynamicLinks (15.7.0):
     - Firebase/DynamicLinks (= 9.6.0)
     - GoogleUtilities/AppDelegateSwizzler
     - React-Core
     - RNFBApp
-  - RNFBFirestore (15.5.0):
+  - RNFBFirestore (15.7.0):
     - Firebase/Firestore (= 9.6.0)
     - React-Core
     - RNFBApp
@@ -1339,6 +1341,7 @@ DEPENDENCIES:
   - react-native-biometrics (from `../node_modules/react-native-biometrics`)
   - react-native-config (from `../node_modules/react-native-config`)
   - react-native-fbsdk-next (from `../node_modules/react-native-fbsdk-next`)
+  - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-maps (from `../node_modules/react-native-maps`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-restart (from `../node_modules/react-native-restart`)
@@ -1481,6 +1484,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-config"
   react-native-fbsdk-next:
     :path: "../node_modules/react-native-fbsdk-next"
+  react-native-image-picker:
+    :path: "../node_modules/react-native-image-picker"
   react-native-maps:
     :path: "../node_modules/react-native-maps"
   react-native-netinfo:
@@ -1619,10 +1624,11 @@ SPEC CHECKSUMS:
   react-native-biometrics: 4aec6978534944b5f830b9c3489b721c906ea70b
   react-native-config: 7cd105e71d903104e8919261480858940a6b9c0e
   react-native-fbsdk-next: d6e1c6ad1693c891add104ab529d96906784ba9c
-  react-native-maps: f4067ffa5044ade5bf98d6dde15014318a537c2f
-  react-native-netinfo: 129bd99f607a2dc5bb096168f3e5c150fd1f1c95
+  react-native-image-picker: 4bc9ed38c8be255b515d8c88babbaf74973f91a8
+  react-native-maps: 085f614cf14d3637b2048bb9752da5b1c27c2886
+  react-native-netinfo: b514dd6d9cd512b90e178c5b7158df1a1c568d47
   react-native-restart: 45c8dca02491980f2958595333cbccd6877cb57e
-  react-native-safe-area-context: b456e1c40ec86f5593d58b275bd0e9603169daca
+  react-native-safe-area-context: 99b24a0c5acd0d5dcac2b1a7f18c49ea317be99a
   react-native-slider: d3ae4270cf8a8cc45a69912db0cc42b151560d5a
   react-native-webview: d33e2db8925d090871ffeb232dfa50cb3a727581
   React-perflogger: 281c34e42f13245c7a4d6932364d9182f8655e1a
@@ -1638,12 +1644,12 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 8030b9cf9b9e87b878d92da680b55b5e74c58e70
   ReactCommon: a9414b91f0d19de002b55d9f4f6cb176d6dd8452
   RNCAsyncStorage: 0c357f3156fcb16c8589ede67cc036330b6698ca
-  RNDeviceInfo: 4a2d995e05823cf364e8791bfa450d8f2f461c42
+  RNDeviceInfo: 8b83e99e290deaf1bab71673cc636776ef647b6f
   RNExitApp: c4e052df2568b43bec8a37c7cd61194d4cfee2c3
-  RNFBApp: 02d3c5a619d7ab2c47655c311f158016ba7a8fb8
-  RNFBAuth: c512f41b4eb104c8ea594fcba1176d6c32eceea5
-  RNFBDynamicLinks: 9e51e3ceb97bebfe445fe99fdf95c7330f847fbf
-  RNFBFirestore: 3de61b1205eecef2cf74142d13e1adc3958fcb3d
+  RNFBApp: ad6ad2dd37ccf10e737ec8688208761026331d64
+  RNFBAuth: 26fb3495911fcb6c201a4a18fb7bede51d1d0199
+  RNFBDynamicLinks: ceddbfe29b52c4c2a1705571c5bf11e6d42130d6
+  RNFBFirestore: 89d7adb8138384f134e722c2dc883084f7e2808f
   RNGoogleSignin: b2179ba653c759b936404a7746fc5302f9de6a5a
   RNScreens: 0df01424e9e0ed7827200d6ed1087ddd06c493f9
   RNSnackbar: be3333a21a453ccc272f41a8add5a71f7d44dfcd

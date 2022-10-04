@@ -4,6 +4,8 @@ import Header from '@navdeep/components/Header'
 import { vh, vw } from '@navdeep/utils/dimensions'
 import fonts from '@navdeep/utils/fonts'
 import LinearGradient from 'react-native-linear-gradient';
+import { launchCamera, launchImageLibrary, ImageLibraryOptions, CameraOptions } from 'react-native-image-picker';
+import storage from '@react-native-firebase/storage';
 
 export default function StoryScreen(props: any) {
     const [showModal, setshowModal] = useState<boolean>(false)
@@ -60,11 +62,63 @@ const StoryCard = (props: any) => {
 }
 
 const AddStoryModal = (props: any) => {
+
+    const onPressTakePhoto = async () => {
+        let options: CameraOptions = {
+            mediaType: 'mixed'
+        }
+        launchCamera(options, async (response: any) => {
+            console.log('Response of image camera= ', response);
+            if (response.didCancel) {
+                console.log('User cancelled image picker');
+            } else if (response.error) {
+                console.log('ImagePicker Error: ', response.error);
+            } else {
+                try {
+                    let reference=await storage().ref('story/'+response?.assets?.[0]?.fileName ?? 'filename')
+                    if(reference){
+                        reference.putFile(response?.assets?.[0]?.uri)
+                    }
+                    // await storage().ref('story/'+response?.assets?.[0]?.fileName ?? 'filename').getDownloadURL().then((url)=>{
+                    //     console.log('downloaded url-->>',url);
+                        
+                    // })
+                } catch (error) {
+                    console.log(error);
+
+                }
+            }
+        })
+
+    }
+
+    const onPressChooseFromGallery = () => {
+        let options: ImageLibraryOptions = {
+            mediaType: 'mixed'
+        }
+        launchImageLibrary(options, (response: any) => {
+            console.log('Response of image gallery= ', response);
+            if (response.didCancel) {
+                console.log('User cancelled image picker');
+            } else if (response.error) {
+                console.log('ImagePicker Error: ', response.error);
+            } else {
+                const source = { uri: response.uri };
+            }
+        })
+    }
+
     return (
         <Modal transparent={true} animationType='slide' visible={props?.showModal ?? false}>
             <TouchableOpacity onPress={() => props?.onRequestClose()} style={{ flex: 1 }} activeOpacity={1}>
                 <View style={styles.modalBackground}>
                     <View style={styles.horizontalLine} />
+                    <TouchableOpacity style={styles.modalBtn} onPress={onPressTakePhoto}>
+                        <Text style={styles.modalBtnText}>Take Photo</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.modalBtn} onPress={onPressChooseFromGallery}>
+                        <Text style={styles.modalBtnText}>Choose from Gallery</Text>
+                    </TouchableOpacity>
                 </View>
             </TouchableOpacity>
         </Modal>
@@ -119,6 +173,21 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
         alignSelf: 'center',
         width: vw(45),
-        borderRadius: vw(100)
-    }
+        borderRadius: vw(100),
+        marginBottom: vh(10)
+    },
+    modalBtn: {
+        alignSelf: 'center',
+        paddingVertical: vh(15),
+        paddingHorizontal: vw(25),
+        backgroundColor: '#29d637',
+        borderRadius: vw(50),
+        marginBottom: vh(8)
+    },
+    modalBtnText: {
+        fontSize: vw(14),
+        fontFamily: fonts.BOLD,
+        textAlign: "center",
+        color: 'white'
+    },
 })
